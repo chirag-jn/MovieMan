@@ -1,8 +1,10 @@
-package com.chiragjn.movieman;
+package com.chiragjn.movieman.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.chiragjn.movieman.R;
 
 public class SplashActivity extends AppCompatActivity {
 
