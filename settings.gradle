@@ -1,0 +1,2 @@
+rootProject.name = "MovieMan"
+include ':app'
