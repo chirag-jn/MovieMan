@@ -1,10 +1,10 @@
-name: Build Workflow
+name: Android
 
 on: [pull_request, push]
 
 jobs:
-  testing:
-    name: Testing
+  building:
+    name: Build
 
     runs-on: ubuntu-latest
 
@@ -23,6 +23,5 @@ jobs:
       - name: Change wrapper permissions
         run: chmod +x ./gradlew
 
-      #       Step 1: Assemble debug apk
       - name: Assemble Debug APK
         run: ./gradlew assembleDebug
