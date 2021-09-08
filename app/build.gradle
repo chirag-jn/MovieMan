@@ -23,6 +23,19 @@ android {
         versionName buildVersionName(versionMajor, versionMinor, versionPatch)
         versionCode buildVersionCode(versionMajor, versionMinor, versionPatch)
 
+        def apiFile = file("api.properties")
+        def apiProperties = new Properties()
+
+        def fakeApiFile = file("fakeapi.properties")
+
+        if (apiFile.exists()) {
+            apiProperties.load(apiFile.newInputStream())
+        } else {
+            apiProperties.load(fakeApiFile.newInputStream())
+        }
+
+        buildConfigField "String", "API_KEY", formatStringField(apiProperties["key"])
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -54,6 +67,10 @@ static def buildVersionName(versionMajor, versionMinor, versionPatch) {
 
 static def buildVersionCode(versionMajor, versionMinor, versionPatch) {
     return versionMajor * 10**2 + versionMinor * 10**1 + versionPatch * 10**0
+}
+
+static def formatStringField(field) {
+    return "\"${field}\""
 }
 
 dependencies {
