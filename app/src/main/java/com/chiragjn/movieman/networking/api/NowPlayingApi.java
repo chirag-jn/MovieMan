@@ -1,8 +1,6 @@
 package com.chiragjn.movieman.networking.api;
 
-import com.chiragjn.movieman.networking.dao.Movie;
-
-import java.util.List;
+import com.chiragjn.movieman.networking.dao.TmdbResponseData;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -10,5 +8,5 @@ import retrofit2.http.GET;
 public interface NowPlayingApi {
 
     @GET("now_playing")
-    Call<List<Movie>> getMoviesNowPlaying();
+    Call<TmdbResponseData> getMoviesNowPlaying();
 }

@@ -1,8 +1,6 @@
 package com.chiragjn.movieman.networking.api;
 
-import com.chiragjn.movieman.networking.dao.Movie;
-
-import java.util.List;
+import com.chiragjn.movieman.networking.dao.TmdbResponseData;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -10,8 +8,8 @@ import retrofit2.http.GET;
 public interface TrendingApi {
 
     @GET("day")
-    Call<List<Movie>> getMoviesByDay();
+    Call<TmdbResponseData> getMoviesByDay();
 
     @GET("week")
-    Call<List<Movie>> getMoviesByWeek();
+    Call<TmdbResponseData> getMoviesByWeek();
 }
