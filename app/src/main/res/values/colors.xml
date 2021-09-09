@@ -7,5 +7,12 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="app_bgd">#F5E3E0</color>
+
+<!--    Palette-->
+    <color name="palette_1">#F5E3E0</color>
+    <color name="palette_2">#E8B4BC</color>
+    <color name="palette_3">#D282A6</color>
+    <color name="palette_4">#6E4555</color>
+    <color name="palette_5">#3A3238</color>
+
 </resources>

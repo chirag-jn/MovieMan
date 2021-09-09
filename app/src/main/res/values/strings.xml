@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Movie Man</string>
 
-<!--    Navbar-->
+    <!--    Navbar-->
     <string name="trending">Trending</string>
     <string name="now_playing">Now Playing</string>
     <string name="search">Search</string>

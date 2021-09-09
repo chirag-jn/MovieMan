@@ -3,10 +3,16 @@ package com.chiragjn.movieman.activity;
 import android.os.Bundle;
 import android.util.Log;
 
+import androidx.fragment.app.FragmentContainerView;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
+
 import com.chiragjn.movieman.R;
 import com.chiragjn.movieman.networking.dao.TmdbResponseData;
 import com.chiragjn.movieman.networking.listener.ErrorListener;
 import com.chiragjn.movieman.networking.listener.ResponseListener;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomeActivity extends BaseActivity {
 
@@ -22,6 +28,14 @@ public class HomeActivity extends BaseActivity {
     @Override
     void bindView() {
         setContentView(R.layout.activity_home);
+
+        setNavBarView();
+    }
+
+    void setNavBarView() {
+        BottomNavigationView navView = findViewById(R.id.bottomNavBar);
+        NavController navController = Navigation.findNavController(this, R.id.navFragment);
+        NavigationUI.setupWithNavController(navView, navController);
     }
 
     void getMovies() {
