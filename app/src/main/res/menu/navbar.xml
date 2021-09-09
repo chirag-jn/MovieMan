@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nowPlayingFragmentIcon"
+        android:icon="@drawable/ic_now_playing"
+        android:title="@string/now_playing" />
+    <item
+        android:id="@+id/trendingFragmentIcon"
+        android:icon="@drawable/ic_trending"
+        android:title="@string/trending" />
+    <item
+        android:id="@+id/searchFragmentIcon"
+        android:icon="@drawable/ic_search"
+        android:title="@string/search" />
+    <item
+        android:id="@+id/bookmarkFragmentIcon"
+        android:icon="@drawable/ic_bookmark"
+        android:title="@string/bookmarks" />
+
+
+</menu>
