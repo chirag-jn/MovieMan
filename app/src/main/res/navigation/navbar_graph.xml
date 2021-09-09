@@ -6,15 +6,15 @@
     app:startDestination="@id/trendingFragment">
 
     <fragment
-        android:id="@+id/trendingFragment"
-        android:name="com.chiragjn.movieman.fragment.TrendingFragment"
-        android:label="fragment_trending"
-        tools:layout="@layout/fragment_trending" />
-    <fragment
         android:id="@+id/nowPlayingFragment"
         android:name="com.chiragjn.movieman.fragment.NowPlayingFragment"
         android:label="fragment_now_playing"
         tools:layout="@layout/fragment_now_playing" />
+    <fragment
+        android:id="@+id/trendingFragment"
+        android:name="com.chiragjn.movieman.fragment.TrendingFragment"
+        android:label="fragment_trending"
+        tools:layout="@layout/fragment_trending" />
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.chiragjn.movieman.fragment.SearchFragment"

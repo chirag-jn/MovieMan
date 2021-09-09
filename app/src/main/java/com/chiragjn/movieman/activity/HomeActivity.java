@@ -36,6 +36,7 @@ public class HomeActivity extends BaseActivity {
         BottomNavigationView navView = findViewById(R.id.bottomNavBar);
         NavController navController = Navigation.findNavController(this, R.id.navFragment);
         NavigationUI.setupWithNavController(navView, navController);
+        navView.setSelectedItemId(R.id.nowPlayingFragment);
     }
 
     void getMovies() {
