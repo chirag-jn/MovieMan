@@ -1,9 +1,15 @@
 package com.chiragjn.movieman.networking;
 
+import com.chiragjn.movieman.BuildConfig;
 import com.chiragjn.movieman.Endpoints;
 import com.chiragjn.movieman.networking.api.NowPlayingApi;
 import com.chiragjn.movieman.networking.api.TrendingApi;
+import com.chiragjn.movieman.utils.Constants;
 
+import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -14,11 +20,32 @@ public class RetrofitClient {
     private final NowPlayingApi nowPlayingApi;
 
     private RetrofitClient() {
+
         Retrofit retrofit = new Retrofit.Builder().baseUrl(Endpoints.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
+                .client(getOkHttpClient())
                 .build();
         trendingApi = retrofit.create(TrendingApi.class);
         nowPlayingApi = retrofit.create(NowPlayingApi.class);
+    }
+
+    private OkHttpClient getOkHttpClient() {
+        OkHttpClient client;
+
+        client = new OkHttpClient.Builder().addInterceptor(chain -> {
+            Request request = chain.request();
+            HttpUrl url = request.url().newBuilder().addQueryParameter(Constants.API_KEY, BuildConfig.API_KEY).build();
+            request = request.newBuilder().url(url).build();
+            return chain.proceed(request);
+        }).build();
+
+        if (BuildConfig.DEBUG) {
+            HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+            interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+            client = client.newBuilder().addInterceptor(interceptor).build();
+        }
+
+        return client;
     }
 
     public static synchronized RetrofitClient getInstance() {

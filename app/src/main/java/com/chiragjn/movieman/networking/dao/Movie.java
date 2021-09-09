@@ -47,4 +47,11 @@ public class Movie {
     private String mediaType;
 
     public Movie() {}
+
+    @Override
+    public String toString() {
+        return "Movie{" +
+                "title='" + title + '\'' +
+                '}';
+    }
 }
