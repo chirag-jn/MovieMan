@@ -7,9 +7,9 @@ import retrofit2.http.GET;
 
 public interface TrendingApi {
 
-    @GET("day")
+    @GET("trending/movie/day")
     Call<TmdbResponseData> getMoviesByDay();
 
-    @GET("week")
+    @GET("trending/movie/week")
     Call<TmdbResponseData> getMoviesByWeek();
 }

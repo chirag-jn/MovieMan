@@ -4,12 +4,9 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.chiragjn.movieman.R;
-import com.chiragjn.movieman.networking.RetrofitClient;
 import com.chiragjn.movieman.networking.dao.TmdbResponseData;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import com.chiragjn.movieman.networking.listener.ErrorListener;
+import com.chiragjn.movieman.networking.listener.ResponseListener;
 
 public class HomeActivity extends BaseActivity {
 
@@ -28,18 +25,23 @@ public class HomeActivity extends BaseActivity {
     }
 
     void getMovies() {
-        Call<TmdbResponseData> call = RetrofitClient.getInstance().getTrendingApi().getMoviesByDay();
-        call.enqueue(new Callback<TmdbResponseData>() {
+
+        getApiManager().getTrendingMoviesByDay(new ResponseListener<TmdbResponseData>() {
             @Override
-            public void onResponse(Call<TmdbResponseData> call, Response<TmdbResponseData> response) {
-                TmdbResponseData movieList = response.body();
-                assert movieList != null;
-                Log.v(getString(R.string.app_name), movieList.toString());
+            public void onResponse(TmdbResponseData response, int statusCode) {
+                Log.v(getString(R.string.app_name), response.toString());
+            }
+        }, new ErrorListener() {
+            @Override
+            public void onErrorResponse(Throwable t) {
+//                TODO: Show Internet Disconnection Snackbar
+                Log.v(getString(R.string.app_name), t.getMessage());
             }
 
             @Override
-            public void onFailure(Call<TmdbResponseData> call, Throwable t) {
-                Log.v(getString(R.string.app_name), t.getMessage());
+            public void onErrorResponse(int statusCode) {
+//                TODO: Show Internet Disconnection Snackbar
+                Log.v(getString(R.string.app_name), "Error: " + statusCode);
             }
         });
     }

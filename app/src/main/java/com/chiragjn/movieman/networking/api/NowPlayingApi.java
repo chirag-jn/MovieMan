@@ -7,6 +7,6 @@ import retrofit2.http.GET;
 
 public interface NowPlayingApi {
 
-    @GET("now_playing")
+    @GET("movie/now_playing")
     Call<TmdbResponseData> getMoviesNowPlaying();
 }
