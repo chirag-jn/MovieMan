@@ -15,4 +15,6 @@
     <color name="palette_4">#6E4555</color>
     <color name="palette_5">#3A3238</color>
 
+    <color name="bookmark">#FF0000</color>
+
 </resources>

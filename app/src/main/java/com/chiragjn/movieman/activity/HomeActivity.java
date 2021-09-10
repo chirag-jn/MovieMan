@@ -21,8 +21,6 @@ public class HomeActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         bindView();
-
-        getMovies();
     }
 
     @Override

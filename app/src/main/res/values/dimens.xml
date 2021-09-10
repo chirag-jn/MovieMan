@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="logo_pad">4dp</dimen>
+
+    <dimen name="movie_grid_rating_size">24sp</dimen>
+    <dimen name="movie_grid_rating_pad">4dp</dimen>
 </resources>

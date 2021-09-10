@@ -48,6 +48,10 @@ public class Movie {
 
     public Movie() {}
 
+    public float getVoteAverage() {
+        return voteAverage;
+    }
+
     @Override
     public String toString() {
         return "Movie{" +
