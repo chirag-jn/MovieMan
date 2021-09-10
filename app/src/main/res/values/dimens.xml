@@ -2,6 +2,6 @@
 <resources>
     <dimen name="logo_pad">4dp</dimen>
 
-    <dimen name="movie_grid_rating_size">24sp</dimen>
+    <dimen name="movie_grid_rating_size">18sp</dimen>
     <dimen name="movie_grid_rating_pad">4dp</dimen>
 </resources>

@@ -3,7 +3,6 @@ package com.chiragjn.movieman.fragment.viewManager;
 import android.content.Context;
 import android.graphics.PorterDuff;
 import android.net.Uri;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -89,8 +88,19 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.ViewHolder> {
                 this.movie = movie;
                 String avgVote = movie.getVoteAverage() + "";
                 popularityScore.setText(avgVote);
-                Log.v("Chirag", Endpoints.IMAGE_URL.concat(movie.getPosterPath()));
-                posterImg.setImageURI(Uri.parse(Endpoints.IMAGE_URL.concat(movie.getPosterPath())));
+
+                Uri uri = Uri.parse(Endpoints.IMAGE_URL.concat(movie.getPosterPath()));
+
+//                ImageRequest request = ImageRequestBuilder.newBuilderWithSource(uri)
+//                        .setResizeOptions(new ResizeOptions(50, 50))
+//                        .build();
+//
+//                posterImg.setController(Fresco.newDraweeControllerBuilder()
+//                .setOldController(posterImg.getController())
+//                .setImageRequest(request)
+//                .build());
+
+                posterImg.setImageURI(uri);
             }
         }
 
