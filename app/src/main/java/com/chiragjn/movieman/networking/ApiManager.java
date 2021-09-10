@@ -16,18 +16,18 @@ public class ApiManager {
         this.client = client;
     }
 
-    public void getTrendingMoviesByDay(final ResponseListener<TmdbResponseData> listener, final ErrorListener errorListener) {
-        Call<TmdbResponseData> call = client.getTrendingApi().getMoviesByDay();
+    public void getTrendingMoviesByDay(int page, final ResponseListener<TmdbResponseData> listener, final ErrorListener errorListener) {
+        Call<TmdbResponseData> call = client.getTrendingApi().getMoviesByDay(page);
         callEnqueue(call, listener, errorListener);
     }
 
-    public void getTrendingMoviesByWeek(final ResponseListener<TmdbResponseData> listener, final ErrorListener errorListener) {
-        Call<TmdbResponseData> call = client.getTrendingApi().getMoviesByWeek();
+    public void getTrendingMoviesByWeek(int page, final ResponseListener<TmdbResponseData> listener, final ErrorListener errorListener) {
+        Call<TmdbResponseData> call = client.getTrendingApi().getMoviesByWeek(page);
         callEnqueue(call, listener, errorListener);
     }
 
-    public void getNowPlayingMovies(final ResponseListener<TmdbResponseData> listener, final ErrorListener errorListener) {
-        Call<TmdbResponseData> call = client.getNowPlayingApi().getMoviesNowPlaying();
+    public void getNowPlayingMovies(int page, final ResponseListener<TmdbResponseData> listener, final ErrorListener errorListener) {
+        Call<TmdbResponseData> call = client.getNowPlayingApi().getMoviesNowPlaying(page);
         callEnqueue(call, listener, errorListener);
     }
 

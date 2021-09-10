@@ -3,15 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/palette_1"
     tools:context=".fragment.NowPlayingFragment">
 
-    <TextView
+    <GridView
+        android:id="@+id/moviesGrid"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/now_playing" />
-
-    <com.chiragjn.movieman.ui.MovieView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:gravity="center" />
 
 </FrameLayout>
