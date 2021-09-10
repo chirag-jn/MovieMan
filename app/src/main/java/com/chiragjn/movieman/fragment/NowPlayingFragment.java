@@ -5,16 +5,17 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
-import android.widget.GridView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.chiragjn.movieman.R;
 import com.chiragjn.movieman.activity.HomeActivity;
+import com.chiragjn.movieman.fragment.viewManager.GridAdapter;
 import com.chiragjn.movieman.networking.dao.Movie;
 import com.chiragjn.movieman.networking.dao.TmdbResponseData;
 import com.chiragjn.movieman.networking.listener.ErrorListener;
@@ -22,15 +23,16 @@ import com.chiragjn.movieman.networking.listener.ResponseListener;
 import com.chiragjn.movieman.utils.Constants;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class NowPlayingFragment extends Fragment {
 
     boolean isLoading;
     boolean isLastPage;
     int currentPage;
-    ArrayList<Movie> movies;
+    GridAdapter adapter;
 
-    public GridView gridView;
+    public RecyclerView gridView;
 
     public NowPlayingFragment() {
     }
@@ -58,7 +60,10 @@ public class NowPlayingFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         gridView = view.findViewById(R.id.moviesGrid);
-        gridView.setNumColumns(Constants.COLUMNS);
+        gridView.setLayoutManager(new GridLayoutManager(getActivity(), Constants.COLUMNS));
+
+        adapter = new GridAdapter(getActivity());
+        gridView.setAdapter(adapter);
 
         setScrollListener();
     }
@@ -68,44 +73,14 @@ public class NowPlayingFragment extends Fragment {
         isLoading = false;
         isLastPage = false;
         currentPage = 0;
-        movies = new ArrayList<>();
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-
-        gridView.setOnScrollListener(new AbsListView.OnScrollListener() {
+        gridView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public void onScrollStateChanged(AbsListView absListView, int i) {
-            }
-
-            @Override
-            public void onScroll(AbsListView absListView, int i, int i1, int i2) {
-                int visibleCount = layoutManager.getChildCount();
-                int totalCount = layoutManager.getItemCount();
-                int firstVisiblePosition = layoutManager.findFirstVisibleItemPosition();
-
-                boolean isNotLoading_ifNotLast = !isLoading && !isLastPage;
-                boolean ifAtLast = firstVisiblePosition + visibleCount >= totalCount;
-                boolean isValidFirstItem = firstVisiblePosition >= 0;
-                boolean isTotalMoreThanVisible = totalCount >= Constants.ITEMS_PER_PAGE;
-
-                boolean shouldLoadMore = isValidFirstItem && ifAtLast && isTotalMoreThanVisible && isNotLoading_ifNotLast;
-
-                if (shouldLoadMore) {
-                    loadItems(false);
-                }
-            }
-        });
-
-        gridView.setOnScrollListener(new AbsListView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(AbsListView absListView, int i) {
-            }
-
-            @Override
-            public void onScroll(AbsListView absListView, int i, int i1, int i2) {
-                int visibleCount = layoutManager.getChildCount();
-                int totalCount = layoutManager.getItemCount();
-                int firstVisiblePosition = layoutManager.findFirstVisibleItemPosition();
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                int visibleCount = Objects.requireNonNull(gridView.getLayoutManager()).getChildCount();
+                int totalCount = gridView.getLayoutManager().getItemCount();
+                int firstVisiblePosition = ((LinearLayoutManager) gridView.getLayoutManager()).findFirstVisibleItemPosition();
 
                 boolean isNotLoading_ifNotLast = !isLoading && !isLastPage;
                 boolean ifAtLast = firstVisiblePosition + visibleCount >= totalCount;
@@ -133,9 +108,9 @@ public class NowPlayingFragment extends Fragment {
                 @Override
                 public void onResponse(TmdbResponseData response, int statusCode) {
                     if (!isFirstPage) {
-                        movies.addAll(response.getResults());
+                        adapter.addAll((ArrayList<Movie>) response.getResults());
                     } else {
-                        movies = new ArrayList<>(response.getResults());
+                        adapter.setList((ArrayList<Movie>) response.getResults());
                     }
                     isLoading = false;
                     isLastPage = currentPage == response.getTotalPages();

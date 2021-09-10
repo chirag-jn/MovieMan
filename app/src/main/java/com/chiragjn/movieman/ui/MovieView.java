@@ -42,6 +42,11 @@ public class MovieView extends ConstraintLayout {
         initialise(context, attrs);
     }
 
+    public MovieView(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr, @AttrRes int defStyleRes) {
+        super(context, attrs, defStyleAttr, defStyleRes);
+        initialise(context, attrs);
+    }
+
     private void initialise(Context ctx, @Nullable AttributeSet attrs) {
         inflateView(ctx, attrs);
     }
