@@ -2,6 +2,8 @@ package com.chiragjn.movieman.fragment.viewManager;
 
 import android.content.Context;
 import android.graphics.PorterDuff;
+import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +14,10 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.chiragjn.movieman.Endpoints;
 import com.chiragjn.movieman.R;
 import com.chiragjn.movieman.networking.dao.Movie;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;
 
@@ -25,6 +29,7 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.ViewHolder> {
     LayoutInflater inflater;
 
     public GridAdapter(Context ctx) {
+        this.ctx = ctx;
         movieList = new ArrayList<>();
         inflater = LayoutInflater.from(ctx);
     }
@@ -67,7 +72,7 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.ViewHolder> {
 
         private final TextView popularityScore;
         private final ImageView bookmarkBtn;
-        private ImageView posterImg;
+        private SimpleDraweeView posterImg;
         private Movie movie;
 
         public ViewHolder(View view) {
@@ -84,6 +89,8 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.ViewHolder> {
                 this.movie = movie;
                 String avgVote = movie.getVoteAverage() + "";
                 popularityScore.setText(avgVote);
+                Log.v("Chirag", Endpoints.IMAGE_URL.concat(movie.getPosterPath()));
+                posterImg.setImageURI(Uri.parse(Endpoints.IMAGE_URL.concat(movie.getPosterPath())));
             }
         }
 

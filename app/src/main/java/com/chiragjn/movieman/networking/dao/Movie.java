@@ -52,6 +52,10 @@ public class Movie {
         return voteAverage;
     }
 
+    public String getPosterPath() {
+        return posterPath;
+    }
+
     @Override
     public String toString() {
         return "Movie{" +
