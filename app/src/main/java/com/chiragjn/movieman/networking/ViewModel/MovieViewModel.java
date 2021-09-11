@@ -22,6 +22,13 @@ public class MovieViewModel extends AndroidViewModel {
     @Inject
     protected DatabaseManager dbManager;
 
+    PagedList.Config config = new PagedList.Config.Builder()
+            .setPageSize(Constants.ITEMS_PER_PAGE)
+            .setInitialLoadSizeHint(Constants.ITEMS_IN_MEM)
+            .setPrefetchDistance(Constants.ITEMS_PREFETCH)
+            .setEnablePlaceholders(false)
+            .build();
+
     public MovieViewModel(@NonNull Application application) {
         super(application);
 
@@ -33,12 +40,10 @@ public class MovieViewModel extends AndroidViewModel {
     }
 
     public LiveData<PagedList<Movie>> getAllMoviesPaged() {
-        PagedList.Config config = new PagedList.Config.Builder()
-                .setPageSize(Constants.ITEMS_PER_PAGE)
-                .setInitialLoadSizeHint(Constants.ITEMS_IN_MEM)
-                .setPrefetchDistance(Constants.ITEMS_PREFETCH)
-                .setEnablePlaceholders(false)
-                .build();
         return dbManager.getMoviesPagedList(config);
+    }
+
+    public LiveData<PagedList<Movie>> getAllNowPlayingMoviesPaged() {
+        return dbManager.getNowPlayingMoviesPagedList(config);
     }
 }

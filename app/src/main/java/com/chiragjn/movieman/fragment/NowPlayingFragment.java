@@ -20,6 +20,7 @@ import com.chiragjn.movieman.injector.component.DaggerAppComponent;
 import com.chiragjn.movieman.networking.ApiManager;
 import com.chiragjn.movieman.networking.ViewModel.MovieViewModel;
 import com.chiragjn.movieman.networking.entity.Movie;
+import com.chiragjn.movieman.networking.entity.NowPlaying;
 import com.chiragjn.movieman.networking.entity.util.TmdbResponseData;
 import com.chiragjn.movieman.networking.database.DatabaseManager;
 import com.chiragjn.movieman.networking.listener.ErrorListener;
@@ -60,7 +61,7 @@ public class NowPlayingFragment extends Fragment {
 
         MovieViewModel viewModel = new ViewModelProvider(this).get(MovieViewModel.class);
         adapter = new GridAdapter(getContext());
-        viewModel.getAllMoviesPaged().observe(this, adapter::submitList);
+        viewModel.getAllNowPlayingMoviesPaged().observe(this, adapter::submitList);
     }
 
     @Override
@@ -92,7 +93,15 @@ public class NowPlayingFragment extends Fragment {
             retrofitApi.getNowPlayingMovies(currentPage, new ResponseListener<TmdbResponseData>() {
                 @Override
                 public void onResponse(TmdbResponseData response, int statusCode) {
-                    dbManager.insertMovies((ArrayList<Movie>) response.getResults());
+                    ArrayList<Movie> responseArr = (ArrayList<Movie>) response.getResults();
+                    dbManager.insertMovies(responseArr);
+
+                    ArrayList<NowPlaying> responseIds = new ArrayList<>();
+                    for (Movie movie: responseArr) {
+                        responseIds.add(new NowPlaying(movie.getId()));
+                    }
+                    dbManager.insertNowPlayingMovies(responseIds);
+
                     boolean isLastPage = currentPage == response.getTotalPages();
 
                     if (!isLastPage) {

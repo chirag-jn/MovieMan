@@ -8,6 +8,7 @@ import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
 
 import com.chiragjn.movieman.networking.entity.Movie;
+import com.chiragjn.movieman.networking.entity.NowPlaying;
 
 import java.util.ArrayList;
 
@@ -34,8 +35,19 @@ public class DatabaseManager {
         });
     }
 
+    public void insertNowPlayingMovies(final ArrayList<NowPlaying> movies) {
+        AsyncTask.execute(() -> {
+            movieDb.nowPlayingDao().insertAll(movies);
+        });
+    }
+
     public LiveData<PagedList<Movie>> getMoviesPagedList(PagedList.Config config) {
         DataSource.Factory<Integer, Movie> factory = movieDb.movieDao().getMoviesPaged();
+        return new LivePagedListBuilder<>(factory, config).build();
+    }
+
+    public LiveData<PagedList<Movie>> getNowPlayingMoviesPagedList(PagedList.Config config) {
+        DataSource.Factory<Integer, Movie> factory = movieDb.nowPlayingDao().getMoviesPaged();
         return new LivePagedListBuilder<>(factory, config).build();
     }
 }
