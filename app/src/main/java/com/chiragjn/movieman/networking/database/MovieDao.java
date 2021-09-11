@@ -1,6 +1,7 @@
 package com.chiragjn.movieman.networking.database;
 
 import androidx.lifecycle.LiveData;
+import androidx.paging.DataSource;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
@@ -13,7 +14,7 @@ import java.util.List;
 @Dao
 public interface MovieDao {
 
-    @Query("SELECT * FROM Movie")
+    @Query("SELECT * FROM Movie ORDER BY vote_average DESC")
     List<Movie> getAll();
 
     @Query("SELECT * FROM Movie WHERE id = :id")
@@ -25,12 +26,9 @@ public interface MovieDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insertAll(List<Movie> movies);
 
-    @Query("UPDATE Movie SET bookmarked = :bookmarkVal WHERE id = :id")
-    void updateBookmark(int id, boolean bookmarkVal);
-
     @Query("DELETE from Movie")
     void deleteTable();
 
-    @Query("SELECT * FROM Movie")
-    LiveData<List<Movie>> getPagedMovies();
+    @Query("SELECT * FROM Movie ORDER BY vote_average DESC")
+    DataSource.Factory<Integer, Movie> getMoviesPaged();
 }

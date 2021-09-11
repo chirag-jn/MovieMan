@@ -8,7 +8,7 @@ import com.chiragjn.movieman.Endpoints;
 import com.chiragjn.movieman.MovieManApplication;
 import com.chiragjn.movieman.networking.dao.Movie;
 
-@Database(entities = {Movie.class}, version = 3)
+@Database(entities = {Movie.class}, version = 4)
 public abstract class MovieDatabase extends RoomDatabase {
 
     public abstract MovieDao movieDao();
@@ -23,28 +23,4 @@ public abstract class MovieDatabase extends RoomDatabase {
         }
         return instance;
     }
-
-//    static Callback callback = new Callback() {
-//        @Override
-//        public void onCreate(@NonNull SupportSQLiteDatabase db) {
-//            super.onCreate(db);
-//            new PopulateAsyncTask(instance);
-//        }
-//    };
-
-//    static class PopulateAsyncTask extends AsyncTask<Void, Void, Void> {
-//
-//        private MovieDao movieDao;
-//
-//        PopulateAsyncTask(MovieDatabase movieDb) {
-//            movieDao = movieDb.movieDao();
-//        }
-//
-//        @Override
-//        protected Void doInBackground(Void... voids) {
-//            movieDao.deleteTable();
-//            return null;
-//        }
-//    }
-
 }

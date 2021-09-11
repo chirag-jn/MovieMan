@@ -5,6 +5,7 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.paging.PagedList;
 
 import com.chiragjn.movieman.networking.dao.Movie;
 import com.chiragjn.movieman.networking.database.DatabaseManager;
@@ -26,7 +27,13 @@ public class MovieViewModel extends AndroidViewModel {
         dbManager.insertMovies((ArrayList<Movie>) movies);
     }
 
-    public LiveData<List<Movie>> getAllMovies() {
-        return dbManager.getAllMovies();
+    public LiveData<PagedList<Movie>> getAllMoviesPaged() {
+        PagedList.Config config = new PagedList.Config.Builder()
+                .setPageSize(20)
+                .setInitialLoadSizeHint(40)
+                .setPrefetchDistance(10)
+                .setEnablePlaceholders(false)
+                .build();
+        return dbManager.getMoviesPagedList(config);
     }
 }

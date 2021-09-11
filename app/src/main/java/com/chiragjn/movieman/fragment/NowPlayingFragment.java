@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -27,20 +26,15 @@ import com.chiragjn.movieman.networking.listener.ResponseListener;
 import com.chiragjn.movieman.utils.Constants;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class NowPlayingFragment extends Fragment {
 
-    boolean isLoading;
-    boolean isLastPage;
     int currentPage;
     GridAdapter adapter;
 
     public RecyclerView gridView;
 
     DatabaseManager dbManager;
-
-    private MovieViewModel viewModel;
 
     public NowPlayingFragment() {
         dbManager = new DatabaseManager();
@@ -58,7 +52,9 @@ public class NowPlayingFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        viewModel = new ViewModelProvider(this).get(MovieViewModel.class);
+        MovieViewModel viewModel = new ViewModelProvider(this).get(MovieViewModel.class);
+        adapter = new GridAdapter(getContext());
+        viewModel.getAllMoviesPaged().observe(this, adapter::submitList);
     }
 
     @Override
@@ -74,52 +70,15 @@ public class NowPlayingFragment extends Fragment {
         gridView = view.findViewById(R.id.moviesGrid);
         gridView.setLayoutManager(new GridLayoutManager(getActivity(), Constants.COLUMNS));
         gridView.setItemAnimator(new DefaultItemAnimator());
+        gridView.setHasFixedSize(false);
 
-        adapter = new GridAdapter(getActivity());
         gridView.setAdapter(adapter);
 
-        viewModel.getAllMovies().observe(getActivity(), new Observer<List<Movie>>() {
-            @Override
-            public void onChanged(List<Movie> movies) {
-                adapter.setList((ArrayList<Movie>) movies);
-            }
-        });
-
-        setScrollListener();
-    }
-
-    private void setScrollListener() {
-
-        isLoading = false;
-        isLastPage = false;
         currentPage = 0;
-
-//        gridView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-//            @Override
-//            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-//                super.onScrolled(recyclerView, dx, dy);
-//                int visibleCount = Objects.requireNonNull(gridView.getLayoutManager()).getChildCount();
-//                int totalCount = gridView.getLayoutManager().getItemCount();
-//                int firstVisiblePosition = ((LinearLayoutManager) gridView.getLayoutManager()).findFirstVisibleItemPosition();
-//
-//                boolean isNotLoading_ifNotLast = !isLoading && !isLastPage;
-//                boolean ifAtLast = firstVisiblePosition + visibleCount >= totalCount;
-//                boolean isValidFirstItem = firstVisiblePosition >= 0;
-//                boolean isTotalMoreThanVisible = totalCount >= Constants.ITEMS_PER_PAGE;
-//
-//                boolean shouldLoadMore = isValidFirstItem && ifAtLast && isTotalMoreThanVisible && isNotLoading_ifNotLast;
-//
-//                if (shouldLoadMore) {
-//                    loadItems(false);
-//                }
-//            }
-//        });
-
-        loadItems(true);
+        loadItems();
     }
 
-    private void loadItems(boolean isFirstPage) {
-        isLoading = true;
+    private void loadItems() {
         currentPage = currentPage + 1;
 
         if (getActivity() != null) {
@@ -128,16 +87,10 @@ public class NowPlayingFragment extends Fragment {
                 @Override
                 public void onResponse(TmdbResponseData response, int statusCode) {
                     dbManager.insertMovies((ArrayList<Movie>) response.getResults());
-//                    if (!isFirstPage) {
-//                        adapter.addAll((ArrayList<Movie>) response.getResults());
-//                    } else {
-//                        adapter.setList((ArrayList<Movie>) response.getResults());
-//                    }
-                    isLoading = false;
-                    isLastPage = currentPage == response.getTotalPages();
+                    boolean isLastPage = currentPage == response.getTotalPages();
 
                     if (!isLastPage) {
-                        loadItems(false);
+                        loadItems();
                     }
                 }
             }, new ErrorListener() {
