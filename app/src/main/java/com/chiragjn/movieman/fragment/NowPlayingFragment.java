@@ -9,13 +9,16 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chiragjn.movieman.R;
 import com.chiragjn.movieman.activity.HomeActivity;
 import com.chiragjn.movieman.fragment.viewManager.GridAdapter;
+import com.chiragjn.movieman.networking.ViewModel.MovieViewModel;
 import com.chiragjn.movieman.networking.dao.Movie;
 import com.chiragjn.movieman.networking.dao.TmdbResponseData;
 import com.chiragjn.movieman.networking.database.DatabaseManager;
@@ -24,7 +27,7 @@ import com.chiragjn.movieman.networking.listener.ResponseListener;
 import com.chiragjn.movieman.utils.Constants;
 
 import java.util.ArrayList;
-import java.util.Objects;
+import java.util.List;
 
 public class NowPlayingFragment extends Fragment {
 
@@ -36,6 +39,8 @@ public class NowPlayingFragment extends Fragment {
     public RecyclerView gridView;
 
     DatabaseManager dbManager;
+
+    private MovieViewModel viewModel;
 
     public NowPlayingFragment() {
         dbManager = new DatabaseManager();
@@ -52,6 +57,8 @@ public class NowPlayingFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        viewModel = new ViewModelProvider(this).get(MovieViewModel.class);
     }
 
     @Override
@@ -66,9 +73,17 @@ public class NowPlayingFragment extends Fragment {
 
         gridView = view.findViewById(R.id.moviesGrid);
         gridView.setLayoutManager(new GridLayoutManager(getActivity(), Constants.COLUMNS));
+        gridView.setItemAnimator(new DefaultItemAnimator());
 
         adapter = new GridAdapter(getActivity());
         gridView.setAdapter(adapter);
+
+        viewModel.getAllMovies().observe(getActivity(), new Observer<List<Movie>>() {
+            @Override
+            public void onChanged(List<Movie> movies) {
+                adapter.setList((ArrayList<Movie>) movies);
+            }
+        });
 
         setScrollListener();
     }

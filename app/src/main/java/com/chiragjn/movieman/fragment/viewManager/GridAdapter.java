@@ -3,6 +3,7 @@ package com.chiragjn.movieman.fragment.viewManager;
 import android.content.Context;
 import android.graphics.PorterDuff;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,7 +62,7 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.ViewHolder> {
     }
 
     public void addAll(ArrayList<Movie> list) {
-        int lastIdx = movieList.size()-1;
+        int lastIdx = movieList.size() - 1;
         movieList.addAll(list);
         notifyItemRangeChanged(lastIdx, list.size());
     }
@@ -71,7 +72,7 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.ViewHolder> {
 
         private final TextView popularityScore;
         private final ImageView bookmarkBtn;
-        private SimpleDraweeView posterImg;
+        private final SimpleDraweeView posterImg;
         private Movie movie;
 
         public ViewHolder(View view) {
@@ -89,18 +90,13 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.ViewHolder> {
                 String avgVote = movie.getVoteAverage() + "";
                 popularityScore.setText(avgVote);
 
-                Uri uri = Uri.parse(Endpoints.IMAGE_URL.concat(movie.getPosterPath()));
+                if (movie.getPosterPath()!=null && movie.getPosterPath().length() > 0) {
+                    Uri uri = Uri.parse(Endpoints.IMAGE_URL.concat(movie.getPosterPath()));
 
-//                ImageRequest request = ImageRequestBuilder.newBuilderWithSource(uri)
-//                        .setResizeOptions(new ResizeOptions(50, 50))
-//                        .build();
-//
-//                posterImg.setController(Fresco.newDraweeControllerBuilder()
-//                .setOldController(posterImg.getController())
-//                .setImageRequest(request)
-//                .build());
-
-                posterImg.setImageURI(uri);
+                    posterImg.setImageURI(uri);
+                } else {
+//                    TODO: Set placeholder
+                }
             }
         }
 

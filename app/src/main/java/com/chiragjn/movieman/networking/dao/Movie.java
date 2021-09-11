@@ -3,11 +3,12 @@ package com.chiragjn.movieman.networking.dao;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 import com.google.gson.annotations.SerializedName;
 
-@Entity
+@Entity(indices = @Index(value = {"id"}, unique = true))
 public class Movie {
 
     @ColumnInfo(name = "overview")
