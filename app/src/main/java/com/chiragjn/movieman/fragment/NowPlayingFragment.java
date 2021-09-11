@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.chiragjn.movieman.R;
 import com.chiragjn.movieman.fragment.viewManager.GridAdapter;
-import com.chiragjn.movieman.injector.DaggerApiComponent;
+import com.chiragjn.movieman.injector.component.DaggerAppComponent;
 import com.chiragjn.movieman.networking.ApiManager;
 import com.chiragjn.movieman.networking.ViewModel.MovieViewModel;
 import com.chiragjn.movieman.networking.dao.Movie;
@@ -28,6 +28,8 @@ import com.chiragjn.movieman.utils.Constants;
 
 import java.util.ArrayList;
 
+import javax.inject.Inject;
+
 public class NowPlayingFragment extends Fragment {
 
     int currentPage;
@@ -35,14 +37,14 @@ public class NowPlayingFragment extends Fragment {
 
     public RecyclerView gridView;
 
-    DatabaseManager dbManager;
+    @Inject
+    protected DatabaseManager dbManager;
 
-    ApiManager retrofitApi;
+    @Inject
+    protected ApiManager retrofitApi;
 
     public NowPlayingFragment() {
-        dbManager = new DatabaseManager();
-
-        retrofitApi = DaggerApiComponent.create().getApi();
+        DaggerAppComponent.create().injectField(this);
     }
 
     public static NowPlayingFragment newInstance() {

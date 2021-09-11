@@ -12,12 +12,15 @@ import com.chiragjn.movieman.networking.dao.Movie;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class DatabaseManager {
 
-    private final MovieDatabase movieDb;
+    protected MovieDatabase movieDb;
 
-    public DatabaseManager() {
-        movieDb = MovieDatabase.getInstance();
+    @Inject
+    public DatabaseManager(MovieDatabase movieDb) {
+        this.movieDb = movieDb;
     }
 
     public void deleteAllMovies() {

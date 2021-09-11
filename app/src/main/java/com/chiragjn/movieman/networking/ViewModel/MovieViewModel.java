@@ -7,20 +7,24 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.paging.PagedList;
 
+import com.chiragjn.movieman.injector.component.DaggerAppComponent;
 import com.chiragjn.movieman.networking.dao.Movie;
 import com.chiragjn.movieman.networking.database.DatabaseManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class MovieViewModel extends AndroidViewModel {
 
-    private final DatabaseManager dbManager;
+    @Inject
+    protected DatabaseManager dbManager;
 
     public MovieViewModel(@NonNull Application application) {
         super(application);
 
-        dbManager = new DatabaseManager();
+        DaggerAppComponent.create().injectField(this);
     }
 
     public void insert(List<Movie> movies) {
