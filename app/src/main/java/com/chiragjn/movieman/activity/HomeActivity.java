@@ -32,8 +32,4 @@ public class HomeActivity extends BaseActivity {
         NavigationUI.setupWithNavController(navView, navController);
         navView.setSelectedItemId(R.id.nowPlayingFragment);
     }
-
-    public ApiManager getApi() {
-        return getApiManager();
-    }
 }

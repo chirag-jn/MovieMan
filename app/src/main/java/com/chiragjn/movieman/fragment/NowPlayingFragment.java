@@ -15,8 +15,9 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chiragjn.movieman.R;
-import com.chiragjn.movieman.activity.HomeActivity;
 import com.chiragjn.movieman.fragment.viewManager.GridAdapter;
+import com.chiragjn.movieman.injector.DaggerApiComponent;
+import com.chiragjn.movieman.networking.ApiManager;
 import com.chiragjn.movieman.networking.ViewModel.MovieViewModel;
 import com.chiragjn.movieman.networking.dao.Movie;
 import com.chiragjn.movieman.networking.dao.TmdbResponseData;
@@ -36,9 +37,12 @@ public class NowPlayingFragment extends Fragment {
 
     DatabaseManager dbManager;
 
+    ApiManager retrofitApi;
+
     public NowPlayingFragment() {
         dbManager = new DatabaseManager();
-        dbManager.deleteAllMovies();
+
+        retrofitApi = DaggerApiComponent.create().getApi();
     }
 
     public static NowPlayingFragment newInstance() {
@@ -83,7 +87,7 @@ public class NowPlayingFragment extends Fragment {
 
         if (getActivity() != null) {
 
-            ((HomeActivity) getActivity()).getApi().getNowPlayingMovies(currentPage, new ResponseListener<TmdbResponseData>() {
+            retrofitApi.getNowPlayingMovies(currentPage, new ResponseListener<TmdbResponseData>() {
                 @Override
                 public void onResponse(TmdbResponseData response, int statusCode) {
                     dbManager.insertMovies((ArrayList<Movie>) response.getResults());

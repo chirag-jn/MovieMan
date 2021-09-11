@@ -4,6 +4,8 @@ import com.chiragjn.movieman.networking.dao.TmdbResponseData;
 import com.chiragjn.movieman.networking.listener.ErrorListener;
 import com.chiragjn.movieman.networking.listener.ResponseListener;
 
+import javax.inject.Inject;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -12,6 +14,7 @@ public class ApiManager {
 
     RetrofitClient client;
 
+    @Inject
     public ApiManager(RetrofitClient client) {
         this.client = client;
     }

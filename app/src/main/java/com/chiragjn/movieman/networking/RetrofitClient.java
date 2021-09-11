@@ -6,6 +6,8 @@ import com.chiragjn.movieman.networking.api.NowPlayingApi;
 import com.chiragjn.movieman.networking.api.TrendingApi;
 import com.chiragjn.movieman.utils.Constants;
 
+import javax.inject.Inject;
+
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -19,7 +21,7 @@ public class RetrofitClient {
     private final TrendingApi trendingApi;
     private final NowPlayingApi nowPlayingApi;
 
-    private RetrofitClient() {
+    public RetrofitClient() {
 
         Retrofit retrofit = new Retrofit.Builder().baseUrl(Endpoints.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
