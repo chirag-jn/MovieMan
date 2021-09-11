@@ -1,6 +1,6 @@
 package com.chiragjn.movieman.networking;
 
-import com.chiragjn.movieman.networking.dao.TmdbResponseData;
+import com.chiragjn.movieman.networking.entity.util.TmdbResponseData;
 import com.chiragjn.movieman.networking.listener.ErrorListener;
 import com.chiragjn.movieman.networking.listener.ResponseListener;
 

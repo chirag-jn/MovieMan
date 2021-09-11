@@ -1,4 +1,4 @@
-package com.chiragjn.movieman.networking.dao;
+package com.chiragjn.movieman.networking.entity.util;
 
 import com.google.gson.annotations.SerializedName;
 

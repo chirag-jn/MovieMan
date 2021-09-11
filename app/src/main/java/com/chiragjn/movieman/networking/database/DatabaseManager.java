@@ -7,10 +7,9 @@ import androidx.paging.DataSource;
 import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
 
-import com.chiragjn.movieman.networking.dao.Movie;
+import com.chiragjn.movieman.networking.entity.Movie;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.inject.Inject;
 

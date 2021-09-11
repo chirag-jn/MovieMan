@@ -1,4 +1,4 @@
-package com.chiragjn.movieman.networking.dao;
+package com.chiragjn.movieman.networking.entity;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;

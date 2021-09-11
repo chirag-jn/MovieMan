@@ -6,7 +6,7 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
-import com.chiragjn.movieman.networking.dao.Movie;
+import com.chiragjn.movieman.networking.entity.Movie;
 
 import java.util.List;
 

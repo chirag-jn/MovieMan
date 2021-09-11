@@ -1,4 +1,4 @@
-package com.chiragjn.movieman.networking.dao;
+package com.chiragjn.movieman.networking.entity.util;
 
 import androidx.room.TypeConverter;
 

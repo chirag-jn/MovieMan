@@ -15,7 +15,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 
 import com.chiragjn.movieman.R;
-import com.chiragjn.movieman.networking.dao.Movie;
+import com.chiragjn.movieman.networking.entity.Movie;
 
 public class MovieView extends ConstraintLayout {
 

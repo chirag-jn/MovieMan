@@ -1,6 +1,6 @@
 package com.chiragjn.movieman.networking.api;
 
-import com.chiragjn.movieman.networking.dao.TmdbResponseData;
+import com.chiragjn.movieman.networking.entity.util.TmdbResponseData;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

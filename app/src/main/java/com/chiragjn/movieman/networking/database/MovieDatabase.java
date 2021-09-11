@@ -6,12 +6,21 @@ import androidx.room.RoomDatabase;
 
 import com.chiragjn.movieman.networking.Endpoints;
 import com.chiragjn.movieman.MovieManApplication;
-import com.chiragjn.movieman.networking.dao.Movie;
+import com.chiragjn.movieman.networking.database.dao.BookmarkDao;
+import com.chiragjn.movieman.networking.database.dao.NowPlayingDao;
+import com.chiragjn.movieman.networking.database.dao.TrendingDayDao;
+import com.chiragjn.movieman.networking.database.dao.TrendingWeekDao;
+import com.chiragjn.movieman.networking.entity.Movie;
+import com.chiragjn.movieman.utils.Constants;
 
-@Database(entities = {Movie.class}, version = 4)
+@Database(entities = {Movie.class}, version = Constants.DB_VERSION)
 public abstract class MovieDatabase extends RoomDatabase {
 
     public abstract MovieDao movieDao();
+    public abstract TrendingDayDao trendingDayDao();
+    public abstract TrendingWeekDao trendingWeekDao();
+    public abstract BookmarkDao bookmarkDao();
+    public abstract NowPlayingDao nowPlayingDao();
 
     private static MovieDatabase instance = null;
 

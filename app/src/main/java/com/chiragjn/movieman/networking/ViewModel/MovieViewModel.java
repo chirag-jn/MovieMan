@@ -8,8 +8,9 @@ import androidx.lifecycle.LiveData;
 import androidx.paging.PagedList;
 
 import com.chiragjn.movieman.injector.component.DaggerAppComponent;
-import com.chiragjn.movieman.networking.dao.Movie;
+import com.chiragjn.movieman.networking.entity.Movie;
 import com.chiragjn.movieman.networking.database.DatabaseManager;
+import com.chiragjn.movieman.utils.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,9 +34,9 @@ public class MovieViewModel extends AndroidViewModel {
 
     public LiveData<PagedList<Movie>> getAllMoviesPaged() {
         PagedList.Config config = new PagedList.Config.Builder()
-                .setPageSize(20)
-                .setInitialLoadSizeHint(40)
-                .setPrefetchDistance(10)
+                .setPageSize(Constants.ITEMS_PER_PAGE)
+                .setInitialLoadSizeHint(Constants.ITEMS_IN_MEM)
+                .setPrefetchDistance(Constants.ITEMS_PREFETCH)
                 .setEnablePlaceholders(false)
                 .build();
         return dbManager.getMoviesPagedList(config);
