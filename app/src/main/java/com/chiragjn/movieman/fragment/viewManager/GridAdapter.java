@@ -16,7 +16,7 @@ import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.chiragjn.movieman.Endpoints;
+import com.chiragjn.movieman.networking.Endpoints;
 import com.chiragjn.movieman.R;
 import com.chiragjn.movieman.networking.dao.Movie;
 import com.facebook.drawee.view.SimpleDraweeView;

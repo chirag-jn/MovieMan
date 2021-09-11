@@ -1,12 +1,9 @@
 package com.chiragjn.movieman.networking;
 
 import com.chiragjn.movieman.BuildConfig;
-import com.chiragjn.movieman.Endpoints;
 import com.chiragjn.movieman.networking.api.NowPlayingApi;
 import com.chiragjn.movieman.networking.api.TrendingApi;
 import com.chiragjn.movieman.utils.Constants;
-
-import javax.inject.Inject;
 
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;

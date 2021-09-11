@@ -4,7 +4,7 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-import com.chiragjn.movieman.Endpoints;
+import com.chiragjn.movieman.networking.Endpoints;
 import com.chiragjn.movieman.MovieManApplication;
 import com.chiragjn.movieman.networking.dao.Movie;
 

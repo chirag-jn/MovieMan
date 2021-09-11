@@ -1,4 +1,4 @@
-package com.chiragjn.movieman;
+package com.chiragjn.movieman.networking;
 
 public class Endpoints {
 
