@@ -19,4 +19,7 @@ public interface NowPlayingDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insertAll(List<NowPlaying> movies);
+
+    @Query("DELETE from NowPlaying")
+    void deleteTable();
 }

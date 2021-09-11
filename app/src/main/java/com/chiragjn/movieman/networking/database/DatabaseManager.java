@@ -16,7 +16,7 @@ import javax.inject.Inject;
 
 public class DatabaseManager {
 
-    protected MovieDatabase movieDb;
+    public MovieDatabase movieDb;
 
     @Inject
     public DatabaseManager(MovieDatabase movieDb) {
@@ -39,15 +39,5 @@ public class DatabaseManager {
         AsyncTask.execute(() -> {
             movieDb.nowPlayingDao().insertAll(movies);
         });
-    }
-
-    public LiveData<PagedList<Movie>> getMoviesPagedList(PagedList.Config config) {
-        DataSource.Factory<Integer, Movie> factory = movieDb.movieDao().getMoviesPaged();
-        return new LivePagedListBuilder<>(factory, config).build();
-    }
-
-    public LiveData<PagedList<Movie>> getNowPlayingMoviesPagedList(PagedList.Config config) {
-        DataSource.Factory<Integer, Movie> factory = movieDb.nowPlayingDao().getMoviesPaged();
-        return new LivePagedListBuilder<>(factory, config).build();
     }
 }

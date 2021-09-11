@@ -5,9 +5,12 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.paging.DataSource;
+import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
 
 import com.chiragjn.movieman.injector.component.DaggerAppComponent;
+import com.chiragjn.movieman.networking.database.MovieDatabase;
 import com.chiragjn.movieman.networking.entity.Movie;
 import com.chiragjn.movieman.networking.database.DatabaseManager;
 import com.chiragjn.movieman.utils.Constants;
@@ -21,6 +24,9 @@ public class MovieViewModel extends AndroidViewModel {
 
     @Inject
     protected DatabaseManager dbManager;
+
+    @Inject
+    protected MovieDatabase movieDb;
 
     PagedList.Config config = new PagedList.Config.Builder()
             .setPageSize(Constants.ITEMS_PER_PAGE)
@@ -40,10 +46,27 @@ public class MovieViewModel extends AndroidViewModel {
     }
 
     public LiveData<PagedList<Movie>> getAllMoviesPaged() {
-        return dbManager.getMoviesPagedList(config);
+        DataSource.Factory<Integer, Movie> factory = movieDb.movieDao().getMoviesPaged();
+        return new LivePagedListBuilder<>(factory, config).build();
     }
 
     public LiveData<PagedList<Movie>> getAllNowPlayingMoviesPaged() {
-        return dbManager.getNowPlayingMoviesPagedList(config);
+        DataSource.Factory<Integer, Movie> factory = movieDb.nowPlayingDao().getMoviesPaged();
+        return new LivePagedListBuilder<>(factory, config).build();
+    }
+
+    public LiveData<PagedList<Movie>> getAllTrendingDayMoviesPaged() {
+        DataSource.Factory<Integer, Movie> factory = movieDb.trendingDayDao().getMoviesPaged();
+        return new LivePagedListBuilder<>(factory, config).build();
+    }
+
+    public LiveData<PagedList<Movie>> getAllTrendingWeekMoviesPaged() {
+        DataSource.Factory<Integer, Movie> factory = movieDb.trendingWeekDao().getMoviesPaged();
+        return new LivePagedListBuilder<>(factory, config).build();
+    }
+
+    public LiveData<PagedList<Movie>> getAllBookmarkMoviesPaged() {
+        DataSource.Factory<Integer, Movie> factory = movieDb.bookmarkDao().getMoviesPaged();
+        return new LivePagedListBuilder<>(factory, config).build();
     }
 }
