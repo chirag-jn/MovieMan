@@ -18,6 +18,7 @@ import com.chiragjn.movieman.activity.HomeActivity;
 import com.chiragjn.movieman.fragment.viewManager.GridAdapter;
 import com.chiragjn.movieman.networking.dao.Movie;
 import com.chiragjn.movieman.networking.dao.TmdbResponseData;
+import com.chiragjn.movieman.networking.database.DatabaseManager;
 import com.chiragjn.movieman.networking.listener.ErrorListener;
 import com.chiragjn.movieman.networking.listener.ResponseListener;
 import com.chiragjn.movieman.utils.Constants;
@@ -34,7 +35,11 @@ public class NowPlayingFragment extends Fragment {
 
     public RecyclerView gridView;
 
+    DatabaseManager dbManager;
+
     public NowPlayingFragment() {
+        dbManager = new DatabaseManager();
+        dbManager.deleteAllMovies();
     }
 
     public static NowPlayingFragment newInstance() {
@@ -74,26 +79,26 @@ public class NowPlayingFragment extends Fragment {
         isLastPage = false;
         currentPage = 0;
 
-        gridView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                int visibleCount = Objects.requireNonNull(gridView.getLayoutManager()).getChildCount();
-                int totalCount = gridView.getLayoutManager().getItemCount();
-                int firstVisiblePosition = ((LinearLayoutManager) gridView.getLayoutManager()).findFirstVisibleItemPosition();
-
-                boolean isNotLoading_ifNotLast = !isLoading && !isLastPage;
-                boolean ifAtLast = firstVisiblePosition + visibleCount >= totalCount;
-                boolean isValidFirstItem = firstVisiblePosition >= 0;
-                boolean isTotalMoreThanVisible = totalCount >= Constants.ITEMS_PER_PAGE;
-
-                boolean shouldLoadMore = isValidFirstItem && ifAtLast && isTotalMoreThanVisible && isNotLoading_ifNotLast;
-
-                if (shouldLoadMore) {
-                    loadItems(false);
-                }
-            }
-        });
+//        gridView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+//            @Override
+//            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+//                super.onScrolled(recyclerView, dx, dy);
+//                int visibleCount = Objects.requireNonNull(gridView.getLayoutManager()).getChildCount();
+//                int totalCount = gridView.getLayoutManager().getItemCount();
+//                int firstVisiblePosition = ((LinearLayoutManager) gridView.getLayoutManager()).findFirstVisibleItemPosition();
+//
+//                boolean isNotLoading_ifNotLast = !isLoading && !isLastPage;
+//                boolean ifAtLast = firstVisiblePosition + visibleCount >= totalCount;
+//                boolean isValidFirstItem = firstVisiblePosition >= 0;
+//                boolean isTotalMoreThanVisible = totalCount >= Constants.ITEMS_PER_PAGE;
+//
+//                boolean shouldLoadMore = isValidFirstItem && ifAtLast && isTotalMoreThanVisible && isNotLoading_ifNotLast;
+//
+//                if (shouldLoadMore) {
+//                    loadItems(false);
+//                }
+//            }
+//        });
 
         loadItems(true);
     }
@@ -107,13 +112,18 @@ public class NowPlayingFragment extends Fragment {
             ((HomeActivity) getActivity()).getApi().getNowPlayingMovies(currentPage, new ResponseListener<TmdbResponseData>() {
                 @Override
                 public void onResponse(TmdbResponseData response, int statusCode) {
-                    if (!isFirstPage) {
-                        adapter.addAll((ArrayList<Movie>) response.getResults());
-                    } else {
-                        adapter.setList((ArrayList<Movie>) response.getResults());
-                    }
+                    dbManager.insertMovies((ArrayList<Movie>) response.getResults());
+//                    if (!isFirstPage) {
+//                        adapter.addAll((ArrayList<Movie>) response.getResults());
+//                    } else {
+//                        adapter.setList((ArrayList<Movie>) response.getResults());
+//                    }
                     isLoading = false;
                     isLastPage = currentPage == response.getTotalPages();
+
+                    if (!isLastPage) {
+                        loadItems(false);
+                    }
                 }
             }, new ErrorListener() {
                 @Override
