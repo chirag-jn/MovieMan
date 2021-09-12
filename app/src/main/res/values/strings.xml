@@ -13,6 +13,11 @@
     <string name="rating_desc">Rating</string>
     <string name="default_rating">0.0</string>
 
+<!--    Trending-->
+    <string name="trending_today">Today</string>
+    <string name="trending_week">This Week</string>
+    <string name="trending_view_all">View All >>></string>
+
 <!--    Movie View-->
     <string name="movie_name">Movie Name</string>
     <string name="movie_description">Description</string>
