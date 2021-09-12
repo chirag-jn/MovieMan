@@ -32,4 +32,8 @@
     <string name="share_url" translatable="false">https://movieman.com/movie/</string>
     <string name="refer_msg">Check it out in MovieMan!</string>
     <string name="share_using">Share Movie using</string>
+
+<!--    Search-->
+    <string name="enter_more_than_three">Please enter more than 3 characters.</string>
+    <string name="showing_results_for">Showing results for: </string>
 </resources>

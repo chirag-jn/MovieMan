@@ -2,6 +2,7 @@ package com.chiragjn.movieman.networking;
 
 import com.chiragjn.movieman.BuildConfig;
 import com.chiragjn.movieman.networking.api.NowPlayingApi;
+import com.chiragjn.movieman.networking.api.SearchApi;
 import com.chiragjn.movieman.networking.api.TrendingApi;
 import com.chiragjn.movieman.utils.Constants;
 
@@ -17,6 +18,7 @@ public class RetrofitClient {
     private static RetrofitClient instance = null;
     private final TrendingApi trendingApi;
     private final NowPlayingApi nowPlayingApi;
+    private final SearchApi searchApi;
 
     public RetrofitClient() {
 
@@ -26,6 +28,7 @@ public class RetrofitClient {
                 .build();
         trendingApi = retrofit.create(TrendingApi.class);
         nowPlayingApi = retrofit.create(NowPlayingApi.class);
+        searchApi = retrofit.create(SearchApi.class);
     }
 
     private OkHttpClient getOkHttpClient() {
@@ -56,6 +59,10 @@ public class RetrofitClient {
 
     public TrendingApi getTrendingApi() {
         return trendingApi;
+    }
+
+    public SearchApi getSearchApi() {
+        return searchApi;
     }
 
     public NowPlayingApi getNowPlayingApi() {

@@ -79,4 +79,9 @@ public class MovieViewModel extends AndroidViewModel {
         DataSource.Factory<Integer, Movie> factory = movieDb.bookmarkDao().getMoviesPaged();
         return new LivePagedListBuilder<>(factory, config).build();
     }
+
+    public LiveData<PagedList<Movie>> getSearchedMoviesPaged() {
+        DataSource.Factory<Integer, Movie> factory = movieDb.searchDao().getMoviesPaged();
+        return new LivePagedListBuilder<>(factory, config).build();
+    }
 }

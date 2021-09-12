@@ -34,6 +34,11 @@ public class ApiManager {
         callEnqueue(call, listener, errorListener);
     }
 
+    public void searchMovieByName(String search, int page, final ResponseListener<TmdbResponseData> listener, final ErrorListener errorListener) {
+        Call<TmdbResponseData> call = client.getSearchApi().getMoviesByName(page, search);
+        callEnqueue(call, listener, errorListener);
+    }
+
     private void callEnqueue(Call<TmdbResponseData> call, final ResponseListener<TmdbResponseData> listener, final ErrorListener errorListener) {
         call.enqueue(new Callback<TmdbResponseData>() {
             @Override

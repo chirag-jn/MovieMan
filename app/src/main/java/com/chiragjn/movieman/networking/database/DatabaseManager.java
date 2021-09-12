@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import com.chiragjn.movieman.networking.entity.Bookmark;
 import com.chiragjn.movieman.networking.entity.Movie;
 import com.chiragjn.movieman.networking.entity.NowPlaying;
+import com.chiragjn.movieman.networking.entity.Search;
 import com.chiragjn.movieman.networking.entity.TrendingDay;
 import com.chiragjn.movieman.networking.entity.TrendingWeek;
 
@@ -27,6 +28,7 @@ public class DatabaseManager {
             movieDb.nowPlayingDao().deleteTable();
             movieDb.trendingDayDao().deleteTable();
             movieDb.trendingWeekDao().deleteTable();
+            movieDb.searchDao().deleteTable();
             // Not deleting bookmarked table so that it can be saved across refreshes
         });
     }
@@ -70,6 +72,18 @@ public class DatabaseManager {
     public void insertTrendingWeekMovies(final ArrayList<TrendingWeek> movies) {
         AsyncTask.execute(() -> {
             movieDb.trendingWeekDao().insertAll(movies);
+        });
+    }
+
+    public void insertSearchMovies(final ArrayList<Search> movies) {
+        AsyncTask.execute(() -> {
+            movieDb.searchDao().insertAll(movies);
+        });
+    }
+
+    public void deleteSearchMovies() {
+        AsyncTask.execute(() -> {
+            movieDb.searchDao().deleteTable();
         });
     }
 }

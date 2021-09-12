@@ -6,5 +6,5 @@ public abstract class Constants {
     public static final int ITEMS_PER_PAGE = 20;
     public static final int ITEMS_PREFETCH = 10;
     public static final int ITEMS_IN_MEM = 40;
-    public static final int DB_VERSION = 5;
+    public static final int DB_VERSION = 6;
 }
