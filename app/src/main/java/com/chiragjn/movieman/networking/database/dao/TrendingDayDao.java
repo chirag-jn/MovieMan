@@ -23,6 +23,6 @@ public interface TrendingDayDao {
     @Query("DELETE from TrendingDay")
     void deleteTable();
 
-    @Query("SELECT Movie.* FROM Movie,TrendingDay WHERE Movie.id = TrendingDay.id ORDER BY vote_average DESC LIMIT 10")
-    List<Movie> getTop10Movies();
+    @Query("SELECT Movie.* FROM Movie,TrendingDay WHERE Movie.id = TrendingDay.id ORDER BY vote_average DESC LIMIT 20")
+    DataSource.Factory<Integer, Movie> getTop10Movies();
 }

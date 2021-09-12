@@ -13,19 +13,19 @@
     <string name="rating_desc">Rating</string>
     <string name="default_rating">0.0</string>
 
-<!--    Trending-->
+    <!--    Trending-->
     <string name="trending_today">Today</string>
     <string name="trending_week">This Week</string>
     <string name="trending_view_all">View All >>></string>
 
-<!--    Movie View-->
+    <!--    Movie View-->
     <string name="movie_name">Movie Name</string>
     <string name="movie_description">Description</string>
     <string name="movie_back">Back</string>
     <string name="movie_share">Share</string>
     <string name="movie_bookmark">Bookmark</string>
 
-<!--    Share-->
+    <!--    Share-->
     <string name="movie_view_ref_code">@string/app_name</string>
     <string name="invalid_code">Invalid URL of MovieMan</string>
     <string name="invalid_movie">Invalid Movie</string>

@@ -39,7 +39,6 @@ public class NowPlayingFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // TODO: Load view model using Dagger
         MovieViewModel viewModel = new ViewModelProvider(this).get(MovieViewModel.class);
         adapter = new GridAdapter(getContext());
         viewModel.getAllNowPlayingMoviesPaged().observe(this, adapter::submitList);

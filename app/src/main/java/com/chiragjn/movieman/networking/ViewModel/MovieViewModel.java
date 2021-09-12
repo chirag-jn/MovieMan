@@ -65,6 +65,16 @@ public class MovieViewModel extends AndroidViewModel {
         return new LivePagedListBuilder<>(factory, config).build();
     }
 
+    public LiveData<PagedList<Movie>> getTop10TrendingDayMoviesPaged() {
+        DataSource.Factory<Integer, Movie> factory = movieDb.trendingDayDao().getTop10Movies();
+        return new LivePagedListBuilder<>(factory, config).build();
+    }
+
+    public LiveData<PagedList<Movie>> getTop10TrendingWeekMoviesPaged() {
+        DataSource.Factory<Integer, Movie> factory = movieDb.trendingWeekDao().getTop10Movies();
+        return new LivePagedListBuilder<>(factory, config).build();
+    }
+
     public LiveData<PagedList<Movie>> getAllBookmarkMoviesPaged() {
         DataSource.Factory<Integer, Movie> factory = movieDb.bookmarkDao().getMoviesPaged();
         return new LivePagedListBuilder<>(factory, config).build();

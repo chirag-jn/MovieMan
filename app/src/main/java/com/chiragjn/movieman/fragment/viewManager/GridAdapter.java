@@ -25,7 +25,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;
 
-public class GridAdapter extends PagedListAdapter<Movie, GridAdapter.ViewHolder> {
+public class GridAdapter extends PagedListAdapter<Movie, ViewHolder> {
 
     Context ctx;
 
@@ -71,58 +71,11 @@ public class GridAdapter extends PagedListAdapter<Movie, GridAdapter.ViewHolder>
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.movie_item, parent, false);
-        return new ViewHolder(view);
+        return new ViewHolder(view, ctx);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull GridAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.setValues(getItem(position));
-    }
-
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        // TODO: Use CustomLayout-> MovieView
-
-        private final TextView popularityScore;
-        private final ImageView bookmarkBtn;
-        private final SimpleDraweeView posterImg;
-        private Movie movie;
-
-        public ViewHolder(View view) {
-            super(view);
-            popularityScore = view.findViewById(R.id.movieRating);
-            bookmarkBtn = view.findViewById(R.id.movieBookmark);
-            posterImg = view.findViewById(R.id.movieBgd);
-
-            bookmarkBtn.setOnClickListener(v -> bookMarkOnClick(ctx));
-
-            view.setOnClickListener(vClick -> {
-                if (movie != null && movie.getId() >= 0) {
-                    String value = String.valueOf(movie.getId());
-                    Intent i = new Intent(ctx, MovieActivity.class);
-                    i.putExtra(MovieActivity.MOVIE_ID_KEY, value);
-                    ctx.startActivity(i);
-                }
-            });
-        }
-
-        public void setValues(Movie movie) {
-            if (movie != null) {
-                this.movie = movie;
-                String avgVote = movie.getVoteAverage() + "";
-                popularityScore.setText(avgVote);
-
-                if (movie.getPosterPath() != null && movie.getPosterPath().length() > 0) {
-                    Uri uri = Uri.parse(Endpoints.IMAGE_URL.concat(movie.getPosterPath()));
-
-                    posterImg.setImageURI(uri);
-                } else {
-//                    TODO: Set placeholder image
-                }
-            }
-        }
-
-        private void bookMarkOnClick(Context ctx) {
-            bookmarkBtn.setColorFilter(ContextCompat.getColor(ctx, R.color.bookmark), PorterDuff.Mode.SRC_IN);
-        }
     }
 }
