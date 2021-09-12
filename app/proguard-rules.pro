@@ -20,3 +20,4 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 -keepclassmembers class com.chiragjn.movieman.networking.entity.* {*; }
+-keepclassmembers class com.chiragjn.movieman.networking.entity.util.* {*; }

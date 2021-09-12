@@ -42,13 +42,12 @@ public class NowPlayingFragment extends Fragment {
         MovieViewModel viewModel = new ViewModelProvider(this).get(MovieViewModel.class);
         adapter = new GridAdapter(getContext(), 0);
         viewModel.getAllNowPlayingMoviesPaged().observe(this, adapter::submitList);
-
-        fetcher.loadNowPlayingItems(0);
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        fetcher.loadNowPlayingItems(0);
         binding = FragmentNowPlayingBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }

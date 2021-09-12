@@ -47,14 +47,13 @@ public class TrendingFragment extends Fragment {
 
         viewModel.getTop10TrendingDayMoviesPaged().observe(this, dayAdapter::submitList);
         viewModel.getTop10TrendingWeekMoviesPaged().observe(this, weekAdapter::submitList);
-
-        fetcher.loadTrendingDayItems(0);
-        fetcher.loadTrendingWeekItems(0);
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        fetcher.loadTrendingDayItems(0);
+        fetcher.loadTrendingWeekItems(0);
         binding = FragmentTrendingBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
