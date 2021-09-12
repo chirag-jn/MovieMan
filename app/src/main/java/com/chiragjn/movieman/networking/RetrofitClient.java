@@ -39,7 +39,7 @@ public class RetrofitClient {
             HttpUrl url = request.url().newBuilder().addQueryParameter(Constants.API_KEY, BuildConfig.API_KEY).build();
             request = request.newBuilder().url(url).build();
             return chain.proceed(request);
-        }).build();
+        }).retryOnConnectionFailure(true).build();
 
         if (BuildConfig.DEBUG) {
             HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
