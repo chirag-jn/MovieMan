@@ -3,6 +3,8 @@ package com.chiragjn.movieman.injector.component;
 
 import com.chiragjn.movieman.activity.MovieActivity;
 import com.chiragjn.movieman.fragment.NowPlayingFragment;
+import com.chiragjn.movieman.fragment.SearchFragment;
+import com.chiragjn.movieman.fragment.TrendingFragment;
 import com.chiragjn.movieman.injector.module.ApiModule;
 import com.chiragjn.movieman.injector.module.RoomModule;
 import com.chiragjn.movieman.networking.DataFetch;
@@ -17,6 +19,8 @@ import dagger.Component;
 public interface AppComponent {
 
     void injectField(NowPlayingFragment fragment);
+    void injectField(SearchFragment fragment);
+    void injectField(TrendingFragment fragment);
     void injectField(MovieViewModel model);
     void injectField(MovieActivity activity);
     void injectField(DataFetch fetch);

@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.chiragjn.movieman.R;
 import com.chiragjn.movieman.databinding.FragmentNowPlayingBinding;
 import com.chiragjn.movieman.fragment.viewManager.GridAdapter;
 import com.chiragjn.movieman.injector.component.DaggerAppComponent;
@@ -36,13 +35,6 @@ public class NowPlayingFragment extends Fragment {
         DaggerAppComponent.create().injectField(this);
     }
 
-    public static NowPlayingFragment newInstance() {
-        NowPlayingFragment fragment = new NowPlayingFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +46,7 @@ public class NowPlayingFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentNowPlayingBinding.inflate(inflater, container, false);
         return binding.getRoot();

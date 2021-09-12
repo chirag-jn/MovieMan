@@ -1,24 +1,21 @@
 package com.chiragjn.movieman.fragment;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.chiragjn.movieman.R;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
+import com.chiragjn.movieman.databinding.FragmentBookmarkBinding;
 
 public class BookmarkFragment extends Fragment {
 
-    public BookmarkFragment() { }
+    private FragmentBookmarkBinding binding;
 
-    public static BookmarkFragment newInstance() {
-        BookmarkFragment fragment = new BookmarkFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
+    public BookmarkFragment() {
     }
 
     @Override
@@ -27,8 +24,20 @@ public class BookmarkFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_bookmark, container, false);
+        binding = FragmentBookmarkBinding.inflate(inflater, container, false);
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 }
