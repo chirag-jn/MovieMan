@@ -1,8 +1,11 @@
 package com.chiragjn.movieman.activity;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
+import com.chiragjn.movieman.R;
 import com.chiragjn.movieman.databinding.ActivityMovieBinding;
 import com.chiragjn.movieman.networking.database.DatabaseManager;
 
@@ -36,10 +39,26 @@ public class MovieActivity extends BaseActivity {
     }
 
     void getIdFromBundle() {
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            String value = extras.getString(MOVIE_ID_KEY);
-            movie_id = Integer.parseInt(value);
+        Uri data = getIntent().getData();
+        if (data != null) {
+            try {
+                String url = data.toString();
+                String[] pathArr = url.split("/");
+                movie_id = Integer.parseInt(pathArr[pathArr.length-1]);
+            } catch (Exception e) {
+                Toast.makeText(this, getString(R.string.invalid_code), Toast.LENGTH_SHORT).show();
+                this.finishAffinity();
+            }
+        } else {
+            Bundle extras = getIntent().getExtras();
+            if (extras != null) {
+                String value = extras.getString(MOVIE_ID_KEY);
+                if(value!=null) {
+                    movie_id = Integer.parseInt(value);
+                } else {
+                    movie_id = -1;
+                }
+            }
         }
     }
 

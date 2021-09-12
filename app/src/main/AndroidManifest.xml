@@ -12,7 +12,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MovieMan">
-        <activity android:name=".activity.MovieActivity"></activity>
+        <activity android:name=".activity.MovieActivity"
+            android:exported="true">
+            <intent-filter
+                android:label="@string/movie_view_ref_code" android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:host="movieman.com"
+                    android:pathPrefix="/movie"
+                    android:scheme="https" />
+            </intent-filter>
+        </activity>
         <activity android:name=".activity.HomeActivity" />
         <activity
             android:name=".activity.SplashActivity"

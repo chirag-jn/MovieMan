@@ -15,4 +15,8 @@
 
 <!--    Movie View-->
     <string name="movie_name">Movie Name</string>
+
+<!--    Share-->
+    <string name="movie_view_ref_code">@string/app_name</string>
+    <string name="invalid_code">Invalid URL of MovieMan</string>
 </resources>
