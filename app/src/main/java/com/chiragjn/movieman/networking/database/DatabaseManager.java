@@ -24,7 +24,6 @@ public class DatabaseManager {
 
     public void deleteAllMovies() {
         AsyncTask.execute(() -> {
-            movieDb.movieDao().deleteTable();
             movieDb.nowPlayingDao().deleteTable();
             movieDb.trendingDayDao().deleteTable();
             movieDb.trendingWeekDao().deleteTable();

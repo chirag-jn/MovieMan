@@ -47,6 +47,9 @@ public class TrendingFragment extends Fragment {
 
         viewModel.getTop10TrendingDayMoviesPaged().observe(this, dayAdapter::submitList);
         viewModel.getTop10TrendingWeekMoviesPaged().observe(this, weekAdapter::submitList);
+
+        fetcher.loadTrendingDayItems(0);
+        fetcher.loadTrendingWeekItems(0);
     }
 
     @Override
@@ -59,6 +62,9 @@ public class TrendingFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        binding.swipeRefreshDay.setRefreshing(true);
+        binding.swipeRefreshWeek.setRefreshing(true);
 
         RecyclerView dayView = binding.dayMoviesGrid;
 
@@ -73,14 +79,30 @@ public class TrendingFragment extends Fragment {
         weekView.setHasFixedSize(false);
 
         dayView.setAdapter(dayAdapter);
+        binding.swipeRefreshDay.setRefreshing(false);
+
         weekView.setAdapter(weekAdapter);
+        binding.swipeRefreshWeek.setRefreshing(false);
+
+        binding.swipeRefreshDay.setOnRefreshListener(() -> {
+            fetcher.deleteAllMovies();
+            fetcher.loadNowPlayingItems(0);
+            fetcher.loadTrendingWeekItems(0);
+            fetcher.loadTrendingDayItems(0);
+            binding.swipeRefreshDay.setRefreshing(false);
+        });
+
+        binding.swipeRefreshWeek.setOnRefreshListener(() -> {
+            fetcher.deleteAllMovies();
+            fetcher.loadNowPlayingItems(0);
+            fetcher.loadTrendingWeekItems(0);
+            fetcher.loadTrendingDayItems(0);
+            binding.swipeRefreshWeek.setRefreshing(false);
+        });
 
         binding.todayViewAll.setOnClickListener(view1 -> openCollectionActivity(0));
 
         binding.weekViewAll.setOnClickListener(view12 -> openCollectionActivity(1));
-
-        fetcher.loadTrendingDayItems(0);
-        fetcher.loadTrendingWeekItems(0);
     }
 
     void openCollectionActivity(int type) {

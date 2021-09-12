@@ -1,6 +1,5 @@
 package com.chiragjn.movieman.activity;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 
@@ -9,6 +8,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.chiragjn.movieman.R;
 import com.chiragjn.movieman.databinding.ActivityMovieCollectionBinding;
 import com.chiragjn.movieman.fragment.viewManager.GridAdapter;
 import com.chiragjn.movieman.injector.component.DaggerAppComponent;
@@ -24,8 +24,6 @@ public class MovieCollectionActivity extends BaseActivity {
 
     @Inject
     protected DataFetch fetcher;
-
-    private Context ctx;
 
     GridAdapter adapter;
 
@@ -70,12 +68,24 @@ public class MovieCollectionActivity extends BaseActivity {
         }
     }
 
+    void setSwipeRefresh() {
+        binding.swipeRefresh.setColorSchemeColors(getColor(R.color.palette_4));
+        binding.swipeRefresh.setOnRefreshListener(() -> {
+            fetcher.deleteAllMovies();
+            fetcher.loadNowPlayingItems(0);
+            fetcher.loadTrendingWeekItems(0);
+            fetcher.loadTrendingDayItems(0);
+            binding.swipeRefresh.setRefreshing(false);
+        });
+    }
+
     @Override
     void bindView() {
-        ctx = this;
         binding = ActivityMovieCollectionBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
+
+        binding.swipeRefresh.setRefreshing(true);
 
         setAdapter();
 
@@ -87,6 +97,9 @@ public class MovieCollectionActivity extends BaseActivity {
 
         gridView.setAdapter(adapter);
 
+        binding.swipeRefresh.setRefreshing(false);
+
+        setSwipeRefresh();
         setBackPress();
     }
 

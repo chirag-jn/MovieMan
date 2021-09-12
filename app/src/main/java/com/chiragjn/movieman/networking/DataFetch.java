@@ -132,6 +132,10 @@ public class DataFetch {
 
     }
 
+    public void deleteAllMovies() {
+        dbManager.deleteAllMovies();
+    }
+
     public void deleteSearchedMovies() {
         dbManager.deleteSearchMovies();
     }

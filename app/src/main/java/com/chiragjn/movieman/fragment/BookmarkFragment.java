@@ -47,6 +47,8 @@ public class BookmarkFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        binding.swipeRefresh.setRefreshing(true);
+
         RecyclerView gridView = binding.moviesGrid;
 
         gridView.setLayoutManager(new GridLayoutManager(getActivity(), Constants.COLUMNS));
@@ -54,6 +56,8 @@ public class BookmarkFragment extends Fragment {
         gridView.setHasFixedSize(false);
 
         gridView.setAdapter(adapter);
+
+        binding.swipeRefresh.setRefreshing(false);
     }
 
     @Override

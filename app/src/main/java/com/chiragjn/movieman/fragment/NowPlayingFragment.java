@@ -42,6 +42,8 @@ public class NowPlayingFragment extends Fragment {
         MovieViewModel viewModel = new ViewModelProvider(this).get(MovieViewModel.class);
         adapter = new GridAdapter(getContext(), 0);
         viewModel.getAllNowPlayingMoviesPaged().observe(this, adapter::submitList);
+
+        fetcher.loadNowPlayingItems(0);
     }
 
     @Override
@@ -55,6 +57,8 @@ public class NowPlayingFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        binding.swipeRefresh.setRefreshing(true);
+
         RecyclerView gridView = binding.moviesGrid;
 
         gridView.setLayoutManager(new GridLayoutManager(getActivity(), Constants.COLUMNS));
@@ -63,7 +67,15 @@ public class NowPlayingFragment extends Fragment {
 
         gridView.setAdapter(adapter);
 
-        fetcher.loadNowPlayingItems(0);
+        binding.swipeRefresh.setRefreshing(false);
+
+        binding.swipeRefresh.setOnRefreshListener(() -> {
+            fetcher.deleteAllMovies();
+            fetcher.loadNowPlayingItems(0);
+            fetcher.loadTrendingWeekItems(0);
+            fetcher.loadTrendingDayItems(0);
+            binding.swipeRefresh.setRefreshing(false);
+        });
     }
 
     @Override
