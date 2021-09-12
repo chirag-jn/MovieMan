@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chiragjn.movieman.R;
+import com.chiragjn.movieman.databinding.FragmentNowPlayingBinding;
 import com.chiragjn.movieman.fragment.viewManager.GridAdapter;
 import com.chiragjn.movieman.injector.component.DaggerAppComponent;
 import com.chiragjn.movieman.networking.DataFetch;
@@ -26,7 +27,7 @@ public class NowPlayingFragment extends Fragment {
 
     GridAdapter adapter;
 
-    public RecyclerView gridView;
+    private FragmentNowPlayingBinding binding;
 
     @Inject
     protected DataFetch fetcher;
@@ -55,14 +56,16 @@ public class NowPlayingFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_now_playing, container, false);
+        binding = FragmentNowPlayingBinding.inflate(inflater, container, false);
+        return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        gridView = view.findViewById(R.id.moviesGrid);
+        RecyclerView gridView = binding.moviesGrid;
+
         gridView.setLayoutManager(new GridLayoutManager(getActivity(), Constants.COLUMNS));
         gridView.setItemAnimator(new DefaultItemAnimator());
         gridView.setHasFixedSize(false);
