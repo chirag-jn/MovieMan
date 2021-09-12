@@ -4,7 +4,7 @@ package com.chiragjn.movieman.injector.component;
 import com.chiragjn.movieman.fragment.NowPlayingFragment;
 import com.chiragjn.movieman.injector.module.ApiModule;
 import com.chiragjn.movieman.injector.module.RoomModule;
-import com.chiragjn.movieman.networking.ViewModel.MovieViewModel;
+import com.chiragjn.movieman.networking.viewmodel.MovieViewModel;
 
 import javax.inject.Singleton;
 

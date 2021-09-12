@@ -1,4 +1,4 @@
-package com.chiragjn.movieman.networking.ViewModel;
+package com.chiragjn.movieman.networking.viewmodel;
 
 import android.app.Application;
 

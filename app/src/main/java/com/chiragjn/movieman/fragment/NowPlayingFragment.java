@@ -18,7 +18,7 @@ import com.chiragjn.movieman.R;
 import com.chiragjn.movieman.fragment.viewManager.GridAdapter;
 import com.chiragjn.movieman.injector.component.DaggerAppComponent;
 import com.chiragjn.movieman.networking.ApiManager;
-import com.chiragjn.movieman.networking.ViewModel.MovieViewModel;
+import com.chiragjn.movieman.networking.viewmodel.MovieViewModel;
 import com.chiragjn.movieman.networking.entity.Movie;
 import com.chiragjn.movieman.networking.entity.NowPlaying;
 import com.chiragjn.movieman.networking.entity.util.TmdbResponseData;
