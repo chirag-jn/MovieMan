@@ -19,4 +19,8 @@ public class Bookmark {
     public void setId(int id) {
         this.id = id;
     }
+
+    public Bookmark(int id) {
+        this.id = id;
+    }
 }

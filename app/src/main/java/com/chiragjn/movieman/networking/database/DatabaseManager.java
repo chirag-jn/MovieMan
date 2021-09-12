@@ -5,6 +5,8 @@ import android.os.AsyncTask;
 import com.chiragjn.movieman.networking.entity.Bookmark;
 import com.chiragjn.movieman.networking.entity.Movie;
 import com.chiragjn.movieman.networking.entity.NowPlaying;
+import com.chiragjn.movieman.networking.entity.TrendingDay;
+import com.chiragjn.movieman.networking.entity.TrendingWeek;
 
 import java.util.ArrayList;
 
@@ -43,8 +45,7 @@ public class DatabaseManager {
     }
 
     public void addBookmark(int id) {
-        Bookmark movie = new Bookmark();
-        movie.setId(id);
+        Bookmark movie = new Bookmark(id);
         movieDb.bookmarkDao().insert(movie);
     }
 
@@ -57,6 +58,18 @@ public class DatabaseManager {
     public void insertNowPlayingMovies(final ArrayList<NowPlaying> movies) {
         AsyncTask.execute(() -> {
             movieDb.nowPlayingDao().insertAll(movies);
+        });
+    }
+
+    public void insertTrendingDayMovies(final ArrayList<TrendingDay> movies) {
+        AsyncTask.execute(() -> {
+            movieDb.trendingDayDao().insertAll(movies);
+        });
+    }
+
+    public void insertTrendingWeekMovies(final ArrayList<TrendingWeek> movies) {
+        AsyncTask.execute(() -> {
+            movieDb.trendingWeekDao().insertAll(movies);
         });
     }
 }

@@ -19,4 +19,8 @@ public class TrendingDay {
     public void setId(int id) {
         this.id = id;
     }
+
+    public TrendingDay(int id) {
+        this.id = id;
+    }
 }

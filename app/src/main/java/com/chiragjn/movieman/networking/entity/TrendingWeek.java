@@ -19,4 +19,9 @@ public class TrendingWeek {
     public void setId(int id) {
         this.id = id;
     }
+
+    public TrendingWeek(int id) {
+        this.id = id;
+    }
+
 }
