@@ -19,4 +19,8 @@
 <!--    Share-->
     <string name="movie_view_ref_code">@string/app_name</string>
     <string name="invalid_code">Invalid URL of MovieMan</string>
+    <string name="invalid_movie">Invalid Movie</string>
+    <string name="share_url" translatable="false">https://movieman.com/movie/</string>
+    <string name="refer_msg">Check it out in MovieMan!</string>
+    <string name="share_using">Share Movie using</string>
 </resources>

@@ -1,13 +1,18 @@
 package com.chiragjn.movieman.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
 import com.chiragjn.movieman.R;
 import com.chiragjn.movieman.databinding.ActivityMovieBinding;
+import com.chiragjn.movieman.injector.component.DaggerAppComponent;
 import com.chiragjn.movieman.networking.database.DatabaseManager;
+import com.chiragjn.movieman.networking.entity.Movie;
 
 import javax.inject.Inject;
 
@@ -19,13 +24,17 @@ public class MovieActivity extends BaseActivity {
     public static final String MOVIE_ID_KEY = "movie_id";
 
     private int movie_id;
+    private Movie movie;
 
     private ActivityMovieBinding binding;
+
+    private Context ctx;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        DaggerAppComponent.create().injectField(this);
         getIdFromBundle();
         bindView();
         populateView();
@@ -33,6 +42,7 @@ public class MovieActivity extends BaseActivity {
 
     @Override
     void bindView() {
+        ctx = this;
         binding = ActivityMovieBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
@@ -63,6 +73,43 @@ public class MovieActivity extends BaseActivity {
     }
 
     void populateView() {
+        findMovie();
         binding.name.setText(String.valueOf(movie_id));
+        setShare();
+    }
+
+    void findMovie() {
+        AsyncTask.execute(() -> {
+            movie = dbManager.getMoviefromId(movie_id);
+            runOnUiThread(() -> {
+                if (movie == null) {
+                    Toast.makeText(ctx, getString(R.string.invalid_code), Toast.LENGTH_SHORT).show();
+//                            TODO: Find via retrofit
+                }
+                if (movie == null) {
+                    Toast.makeText(ctx, getString(R.string.invalid_movie), Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+            });
+        });
+    }
+
+    void setShare() {
+        binding.share.setOnClickListener(view -> {
+            String message = getString(R.string.refer_msg);
+            if (movie!=null) {
+                message = message.concat("\n").concat(movie.getTitle());
+            }
+            message = message.concat("\n").concat(buildShareURL());
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setType("text/plain");
+            intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name));
+            intent.putExtra(Intent.EXTRA_TEXT, message);
+            startActivity(Intent.createChooser(intent, getString(R.string.share_using)));
+        });
+    }
+
+    String buildShareURL() {
+        return getString(R.string.share_url).concat(String.valueOf(movie_id));
     }
 }

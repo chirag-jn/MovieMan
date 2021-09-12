@@ -29,8 +29,8 @@ public class DatabaseManager {
         });
     }
 
-    public void getMoviefromId(int id) {
-        movieDb.movieDao().get(id);
+    public Movie getMoviefromId(int id) {
+        return movieDb.movieDao().get(id);
     }
 
     public void insertMovies(final ArrayList<Movie> movies) {
