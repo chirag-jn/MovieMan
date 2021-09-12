@@ -42,8 +42,8 @@ public class TrendingFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         viewModel = new ViewModelProvider(this).get(MovieViewModel.class);
-        dayAdapter = new GridAdapter(getContext());
-        weekAdapter = new GridAdapter(getContext());
+        dayAdapter = new GridAdapter(getContext(), 0);
+        weekAdapter = new GridAdapter(getContext(), 0);
 
         viewModel.getTop10TrendingDayMoviesPaged().observe(this, dayAdapter::submitList);
         viewModel.getTop10TrendingWeekMoviesPaged().observe(this, weekAdapter::submitList);

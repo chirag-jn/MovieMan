@@ -56,7 +56,7 @@ public class MovieCollectionActivity extends BaseActivity {
 
     void setAdapter() {
         MovieViewModel viewModel = new ViewModelProvider(this).get(MovieViewModel.class);
-        adapter = new GridAdapter(this);
+        adapter = new GridAdapter(this, 0);
 
         switch (type) {
             case 0:

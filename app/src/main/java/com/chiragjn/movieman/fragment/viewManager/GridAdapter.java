@@ -32,6 +32,8 @@ public class GridAdapter extends PagedListAdapter<Movie, ViewHolder> {
     ArrayList<Movie> movieList;
     LayoutInflater inflater;
 
+    int viewType;
+
     private static final DiffUtil.ItemCallback<Movie> DIFF_CALLBACK = new DiffUtil.ItemCallback<Movie>() {
         @Override
         public boolean areItemsTheSame(@NonNull Movie oldItem, @NonNull Movie newItem) {
@@ -44,9 +46,10 @@ public class GridAdapter extends PagedListAdapter<Movie, ViewHolder> {
         }
     };
 
-    public GridAdapter(Context ctx) {
+    public GridAdapter(Context ctx, int viewType) {
         super(DIFF_CALLBACK);
         this.ctx = ctx;
+        this.viewType = viewType;
         movieList = new ArrayList<>();
         inflater = LayoutInflater.from(ctx);
     }
@@ -70,7 +73,18 @@ public class GridAdapter extends PagedListAdapter<Movie, ViewHolder> {
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.movie_item, parent, false);
+        View view;
+        switch (viewType) {
+            case 0:
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.movie_item, parent, false);
+                break;
+            case 1:
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.movie_item, parent, false);
+                break;
+            default:
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.movie_item, parent, false);
+                break;
+        }
         return new ViewHolder(view, ctx);
     }
 

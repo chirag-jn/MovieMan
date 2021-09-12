@@ -40,7 +40,7 @@ public class NowPlayingFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         MovieViewModel viewModel = new ViewModelProvider(this).get(MovieViewModel.class);
-        adapter = new GridAdapter(getContext());
+        adapter = new GridAdapter(getContext(), 0);
         viewModel.getAllNowPlayingMoviesPaged().observe(this, adapter::submitList);
     }
 
