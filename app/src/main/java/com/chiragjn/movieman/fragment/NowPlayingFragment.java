@@ -74,4 +74,10 @@ public class NowPlayingFragment extends Fragment {
 
         fetcher.loadNowPlayingItems(0);
     }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
 }
