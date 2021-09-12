@@ -7,9 +7,12 @@
     <string name="search">Search</string>
     <string name="bookmarks">Bookmarks</string>
 
-<!--    Movie Grid-->
+    <!--    Movie Grid-->
     <string name="movie_desc">Movie</string>
     <string name="bookmark_desc">Bookmark</string>
     <string name="rating_desc">Rating</string>
     <string name="default_rating">0.0</string>
+
+<!--    Movie View-->
+    <string name="movie_name">Movie Name</string>
 </resources>

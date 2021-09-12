@@ -1,6 +1,7 @@
 package com.chiragjn.movieman.fragment.viewManager;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.view.LayoutInflater;
@@ -16,8 +17,9 @@ import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.chiragjn.movieman.networking.Endpoints;
 import com.chiragjn.movieman.R;
+import com.chiragjn.movieman.activity.MovieActivity;
+import com.chiragjn.movieman.networking.Endpoints;
 import com.chiragjn.movieman.networking.entity.Movie;
 import com.facebook.drawee.view.SimpleDraweeView;
 
@@ -92,6 +94,15 @@ public class GridAdapter extends PagedListAdapter<Movie, GridAdapter.ViewHolder>
             posterImg = view.findViewById(R.id.movieBgd);
 
             bookmarkBtn.setOnClickListener(v -> bookMarkOnClick(ctx));
+
+            view.setOnClickListener(vClick -> {
+                if (movie != null && movie.getId() >= 0) {
+                    String value = String.valueOf(movie.getId());
+                    Intent i = new Intent(ctx, MovieActivity.class);
+                    i.putExtra(MovieActivity.MOVIE_ID_KEY, value);
+                    ctx.startActivity(i);
+                }
+            });
         }
 
         public void setValues(Movie movie) {
@@ -100,7 +111,7 @@ public class GridAdapter extends PagedListAdapter<Movie, GridAdapter.ViewHolder>
                 String avgVote = movie.getVoteAverage() + "";
                 popularityScore.setText(avgVote);
 
-                if (movie.getPosterPath()!=null && movie.getPosterPath().length() > 0) {
+                if (movie.getPosterPath() != null && movie.getPosterPath().length() > 0) {
                     Uri uri = Uri.parse(Endpoints.IMAGE_URL.concat(movie.getPosterPath()));
 
                     posterImg.setImageURI(uri);

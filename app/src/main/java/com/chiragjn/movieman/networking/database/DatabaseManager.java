@@ -29,6 +29,10 @@ public class DatabaseManager {
         });
     }
 
+    public void getMoviefromId(int id) {
+        movieDb.movieDao().get(id);
+    }
+
     public void insertMovies(final ArrayList<Movie> movies) {
         AsyncTask.execute(() -> {
             movieDb.movieDao().insertAll(movies);
