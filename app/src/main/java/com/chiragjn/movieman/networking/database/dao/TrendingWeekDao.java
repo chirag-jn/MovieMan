@@ -14,7 +14,7 @@ import java.util.List;
 @Dao
 public interface TrendingWeekDao {
 
-    @Query("SELECT Movie.* FROM Movie, TrendingWeek WHERE Movie.id == TrendingWeek.id ORDER BY vote_average DESC")
+    @Query("SELECT Movie.* FROM Movie, TrendingWeek WHERE Movie.id = TrendingWeek.id ORDER BY vote_average DESC")
     DataSource.Factory<Integer, Movie> getMoviesPaged();
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
@@ -22,4 +22,7 @@ public interface TrendingWeekDao {
 
     @Query("DELETE from TrendingWeek")
     void deleteTable();
+
+    @Query("SELECT Movie.* FROM Movie,TrendingWeek WHERE Movie.id = TrendingWeek.id ORDER BY vote_average DESC LIMIT 10")
+    List<Movie> getTop10Movies();
 }

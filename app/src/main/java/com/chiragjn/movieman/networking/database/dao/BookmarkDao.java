@@ -14,7 +14,7 @@ import java.util.List;
 @Dao
 public interface BookmarkDao {
 
-    @Query("SELECT Movie.* FROM Movie, Bookmark WHERE Movie.id == Bookmark.id ORDER BY vote_average DESC")
+    @Query("SELECT Movie.* FROM Movie, Bookmark WHERE Movie.id = Bookmark.id ORDER BY vote_average DESC")
     DataSource.Factory<Integer, Movie> getMoviesPaged();
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
