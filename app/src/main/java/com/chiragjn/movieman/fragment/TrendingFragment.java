@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.chiragjn.movieman.activity.MovieCollectionActivity;
 import com.chiragjn.movieman.databinding.FragmentTrendingBinding;
 import com.chiragjn.movieman.fragment.viewManager.GridAdapter;
-import com.chiragjn.movieman.fragment.viewManager.TrendingHomeAdapter;
 import com.chiragjn.movieman.injector.component.DaggerAppComponent;
 import com.chiragjn.movieman.networking.DataFetch;
 import com.chiragjn.movieman.networking.viewmodel.MovieViewModel;
