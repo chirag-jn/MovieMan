@@ -1,0 +1,61 @@
+package com.chiragjn.movieman.networking;
+
+import com.chiragjn.movieman.injector.component.DaggerAppComponent;
+import com.chiragjn.movieman.networking.database.DatabaseManager;
+import com.chiragjn.movieman.networking.entity.Movie;
+import com.chiragjn.movieman.networking.entity.NowPlaying;
+import com.chiragjn.movieman.networking.entity.util.TmdbResponseData;
+import com.chiragjn.movieman.networking.listener.ErrorListener;
+import com.chiragjn.movieman.networking.listener.ResponseListener;
+
+import java.util.ArrayList;
+
+import javax.inject.Inject;
+
+public class DataFetch {
+
+    @Inject
+    protected DatabaseManager dbManager;
+
+    @Inject
+    protected ApiManager retrofitApi;
+
+    public DataFetch() {
+        DaggerAppComponent.create().injectField(this);
+    }
+
+    public void loadNowPlayingItems(int currentPage) {
+        int curPage = currentPage + 1;
+
+        retrofitApi.getNowPlayingMovies(curPage, new ResponseListener<TmdbResponseData>() {
+            @Override
+            public void onResponse(TmdbResponseData response, int statusCode) {
+                ArrayList<Movie> responseArr = (ArrayList<Movie>) response.getResults();
+                dbManager.insertMovies(responseArr);
+
+                ArrayList<NowPlaying> responseIds = new ArrayList<>();
+                for (Movie movie : responseArr) {
+                    responseIds.add(new NowPlaying(movie.getId()));
+                }
+                dbManager.insertNowPlayingMovies(responseIds);
+
+                boolean isLastPage = curPage == response.getTotalPages();
+
+                if (!isLastPage) {
+                    loadNowPlayingItems(curPage);
+                }
+            }
+        }, new ErrorListener() {
+            @Override
+            public void onErrorResponse(Throwable t) {
+//                TODO: Show Internet Disconnection Snackbar
+            }
+
+            @Override
+            public void onErrorResponse(int statusCode) {
+//                TODO: Show Internet Disconnection Snackbar
+            }
+        });
+
+    }
+}

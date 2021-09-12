@@ -1,6 +1,7 @@
 package com.chiragjn.movieman.injector.module;
 
 import com.chiragjn.movieman.networking.ApiManager;
+import com.chiragjn.movieman.networking.DataFetch;
 import com.chiragjn.movieman.networking.RetrofitClient;
 
 import javax.inject.Singleton;
@@ -21,5 +22,11 @@ public class ApiModule {
     @Singleton
     ApiManager provideApiManager(RetrofitClient retrofitClient) {
         return new ApiManager(retrofitClient);
+    }
+
+    @Provides
+    @Singleton
+    DataFetch provideDataFetch() {
+        return new DataFetch();
     }
 }

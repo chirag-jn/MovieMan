@@ -3,11 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/palette_5"
     tools:context=".fragment.BookmarkFragment">
 
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/moviesGrid"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/bookmarks" />
+        android:layout_height="wrap_content"
+        android:gravity="center" />
 
 </FrameLayout>

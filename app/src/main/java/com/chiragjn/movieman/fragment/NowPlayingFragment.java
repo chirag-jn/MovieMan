@@ -1,7 +1,6 @@
 package com.chiragjn.movieman.fragment;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,32 +16,20 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.chiragjn.movieman.R;
 import com.chiragjn.movieman.fragment.viewManager.GridAdapter;
 import com.chiragjn.movieman.injector.component.DaggerAppComponent;
-import com.chiragjn.movieman.networking.ApiManager;
+import com.chiragjn.movieman.networking.DataFetch;
 import com.chiragjn.movieman.networking.viewmodel.MovieViewModel;
-import com.chiragjn.movieman.networking.entity.Movie;
-import com.chiragjn.movieman.networking.entity.NowPlaying;
-import com.chiragjn.movieman.networking.entity.util.TmdbResponseData;
-import com.chiragjn.movieman.networking.database.DatabaseManager;
-import com.chiragjn.movieman.networking.listener.ErrorListener;
-import com.chiragjn.movieman.networking.listener.ResponseListener;
 import com.chiragjn.movieman.utils.Constants;
-
-import java.util.ArrayList;
 
 import javax.inject.Inject;
 
 public class NowPlayingFragment extends Fragment {
 
-    int currentPage;
     GridAdapter adapter;
 
     public RecyclerView gridView;
 
     @Inject
-    protected DatabaseManager dbManager;
-
-    @Inject
-    protected ApiManager retrofitApi;
+    protected DataFetch fetcher;
 
     public NowPlayingFragment() {
         DaggerAppComponent.create().injectField(this);
@@ -59,6 +46,7 @@ public class NowPlayingFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // TODO: Load view model using Dagger
         MovieViewModel viewModel = new ViewModelProvider(this).get(MovieViewModel.class);
         adapter = new GridAdapter(getContext());
         viewModel.getAllNowPlayingMoviesPaged().observe(this, adapter::submitList);
@@ -81,46 +69,6 @@ public class NowPlayingFragment extends Fragment {
 
         gridView.setAdapter(adapter);
 
-        currentPage = 0;
-        loadItems();
-    }
-
-    private void loadItems() {
-        currentPage = currentPage + 1;
-
-        if (getActivity() != null) {
-
-            retrofitApi.getNowPlayingMovies(currentPage, new ResponseListener<TmdbResponseData>() {
-                @Override
-                public void onResponse(TmdbResponseData response, int statusCode) {
-                    ArrayList<Movie> responseArr = (ArrayList<Movie>) response.getResults();
-                    dbManager.insertMovies(responseArr);
-
-                    ArrayList<NowPlaying> responseIds = new ArrayList<>();
-                    for (Movie movie: responseArr) {
-                        responseIds.add(new NowPlaying(movie.getId()));
-                    }
-                    dbManager.insertNowPlayingMovies(responseIds);
-
-                    boolean isLastPage = currentPage == response.getTotalPages();
-
-                    if (!isLastPage) {
-                        loadItems();
-                    }
-                }
-            }, new ErrorListener() {
-                @Override
-                public void onErrorResponse(Throwable t) {
-//                TODO: Show Internet Disconnection Snackbar
-                    Log.v(getString(R.string.app_name), t.getMessage());
-                }
-
-                @Override
-                public void onErrorResponse(int statusCode) {
-//                TODO: Show Internet Disconnection Snackbar
-                    Log.v(getString(R.string.app_name), "Error: " + statusCode);
-                }
-            });
-        }
+        fetcher.loadNowPlayingItems(0);
     }
 }
