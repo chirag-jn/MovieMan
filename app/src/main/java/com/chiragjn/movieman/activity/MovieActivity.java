@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.chiragjn.movieman.R;
 import com.chiragjn.movieman.databinding.ActivityMovieBinding;
 import com.chiragjn.movieman.injector.component.DaggerAppComponent;
+import com.chiragjn.movieman.networking.Endpoints;
 import com.chiragjn.movieman.networking.database.DatabaseManager;
 import com.chiragjn.movieman.networking.entity.Movie;
 
@@ -74,8 +75,20 @@ public class MovieActivity extends BaseActivity {
 
     void populateView() {
         findMovie();
-        binding.name.setText(String.valueOf(movie_id));
         setShare();
+        setBackPress();
+    }
+
+    void populateMovie() {
+        if(movie!=null) {
+            binding.name.setText(movie.getTitle());
+            binding.summary.setText(movie.getOverview());
+            binding.share.setVisibility(View.VISIBLE);
+            if (movie.getPosterPath() != null && movie.getPosterPath().length() > 0) {
+                Uri uri = Uri.parse(Endpoints.IMAGE_URL.concat(movie.getPosterPath()));
+                binding.imagePoster.setImageURI(uri);
+            }
+        }
     }
 
     void findMovie() {
@@ -90,6 +103,7 @@ public class MovieActivity extends BaseActivity {
                     Toast.makeText(ctx, getString(R.string.invalid_movie), Toast.LENGTH_SHORT).show();
                     finish();
                 }
+                populateMovie();
             });
         });
     }
@@ -107,6 +121,10 @@ public class MovieActivity extends BaseActivity {
             intent.putExtra(Intent.EXTRA_TEXT, message);
             startActivity(Intent.createChooser(intent, getString(R.string.share_using)));
         });
+    }
+
+    void setBackPress() {
+        binding.buttonBack.setOnClickListener(view -> onBackPressed());
     }
 
     String buildShareURL() {

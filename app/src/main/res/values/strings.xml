@@ -15,6 +15,9 @@
 
 <!--    Movie View-->
     <string name="movie_name">Movie Name</string>
+    <string name="movie_description">Description</string>
+    <string name="movie_back">Back</string>
+    <string name="movie_share">Share</string>
 
 <!--    Share-->
     <string name="movie_view_ref_code">@string/app_name</string>
