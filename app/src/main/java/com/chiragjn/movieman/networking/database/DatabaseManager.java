@@ -57,6 +57,10 @@ public class DatabaseManager {
         });
     }
 
+    public void insertMovie(final Movie movie) {
+        movieDb.movieDao().insert(movie);
+    }
+
     public void insertNowPlayingMovies(final ArrayList<NowPlaying> movies) {
         AsyncTask.execute(() -> {
             movieDb.nowPlayingDao().insertAll(movies);

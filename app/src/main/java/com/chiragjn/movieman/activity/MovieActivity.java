@@ -14,9 +14,12 @@ import androidx.core.content.ContextCompat;
 import com.chiragjn.movieman.R;
 import com.chiragjn.movieman.databinding.ActivityMovieBinding;
 import com.chiragjn.movieman.injector.component.DaggerAppComponent;
+import com.chiragjn.movieman.networking.DataFetch;
 import com.chiragjn.movieman.networking.Endpoints;
 import com.chiragjn.movieman.networking.database.DatabaseManager;
 import com.chiragjn.movieman.networking.entity.Movie;
+import com.chiragjn.movieman.networking.listener.ErrorListener;
+import com.chiragjn.movieman.networking.listener.ResponseListener;
 
 import javax.inject.Inject;
 
@@ -24,6 +27,9 @@ public class MovieActivity extends BaseActivity {
 
     @Inject
     protected DatabaseManager dbManager;
+
+    @Inject
+    protected DataFetch fetcher;
 
     public static final String MOVIE_ID_KEY = "movie_id";
 
@@ -95,6 +101,9 @@ public class MovieActivity extends BaseActivity {
             }
             isMovieBookmarked();
             handleBookmark();
+        } else {
+            Toast.makeText(ctx, getString(R.string.invalid_code), Toast.LENGTH_SHORT).show();
+            this.finishAffinity();
         }
     }
 
@@ -128,17 +137,28 @@ public class MovieActivity extends BaseActivity {
     void findMovie() {
         AsyncTask.execute(() -> {
             movie = dbManager.getMoviefromId(movie_id);
-            runOnUiThread(() -> {
-                if (movie == null) {
-                    Toast.makeText(ctx, getString(R.string.invalid_code), Toast.LENGTH_SHORT).show();
-//                            TODO: Find via retrofit
-                }
-                if (movie == null) {
-                    Toast.makeText(ctx, getString(R.string.invalid_movie), Toast.LENGTH_SHORT).show();
-                    finish();
-                }
-                populateMovie();
-            });
+            if (movie == null) {
+                fetcher.getRetrofitApi().searchMovieById(movie_id, new ResponseListener<Movie>() {
+                    @Override
+                    public void onResponse(Movie response, int statusCode) {
+                        AsyncTask.execute(() -> {
+                            dbManager.insertMovie(response);
+                            movie = dbManager.getMoviefromId(movie_id);
+                            runOnUiThread(MovieActivity.this::populateMovie);
+                        });
+                    }
+                }, new ErrorListener() {
+                    @Override
+                    public void onErrorResponse(Throwable t) {
+                    }
+
+                    @Override
+                    public void onErrorResponse(int statusCode) {
+                    }
+                });
+            } else {
+                runOnUiThread(this::populateMovie);
+            }
         });
     }
 

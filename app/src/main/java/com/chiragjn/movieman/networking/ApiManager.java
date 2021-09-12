@@ -1,5 +1,6 @@
 package com.chiragjn.movieman.networking;
 
+import com.chiragjn.movieman.networking.entity.Movie;
 import com.chiragjn.movieman.networking.entity.util.TmdbResponseData;
 import com.chiragjn.movieman.networking.listener.ErrorListener;
 import com.chiragjn.movieman.networking.listener.ResponseListener;
@@ -39,6 +40,11 @@ public class ApiManager {
         callEnqueue(call, listener, errorListener);
     }
 
+    public void searchMovieById(int id, final ResponseListener<Movie> listener, final ErrorListener errorListener) {
+        Call<Movie> call = client.getSearchApi().getMovieById(id);
+        callMovieEnqueue(call, listener, errorListener);
+    }
+
     private void callEnqueue(Call<TmdbResponseData> call, final ResponseListener<TmdbResponseData> listener, final ErrorListener errorListener) {
         call.enqueue(new Callback<TmdbResponseData>() {
             @Override
@@ -52,6 +58,26 @@ public class ApiManager {
 
             @Override
             public void onFailure(Call<TmdbResponseData> call, Throwable t) {
+                if (!call.isCanceled()) {
+                    errorListener.onErrorResponse(t);
+                }
+            }
+        });
+    }
+
+    private void callMovieEnqueue(Call<Movie> call, final ResponseListener<Movie> listener, final ErrorListener errorListener) {
+        call.enqueue(new Callback<Movie>() {
+            @Override
+            public void onResponse(Call<Movie> call, Response<Movie> response) {
+                if (response.isSuccessful()) {
+                    listener.onResponse(response.body(), response.code());
+                } else {
+                    errorListener.onErrorResponse(response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Movie> call, Throwable t) {
                 if (!call.isCanceled()) {
                     errorListener.onErrorResponse(t);
                 }

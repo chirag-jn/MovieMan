@@ -1,5 +1,6 @@
 package com.chiragjn.movieman.networking.api;
 
+import com.chiragjn.movieman.networking.entity.Movie;
 import com.chiragjn.movieman.networking.entity.util.TmdbResponseData;
 
 import retrofit2.Call;
@@ -13,5 +14,5 @@ public interface SearchApi {
     Call<TmdbResponseData> getMoviesByName(@Query("page") int page, @Query("query") String search);
 
     @GET("movie/{id}")
-    Call<TmdbResponseData> getMoviesById(@Path("id") int id);
+    Call<Movie> getMovieById(@Path("id") int id);
 }

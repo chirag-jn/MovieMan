@@ -136,6 +136,25 @@ public class DataFetch {
         dbManager.deleteSearchMovies();
     }
 
+    public void searchMovieById(int id) {
+        retrofitApi.searchMovieById(id, new ResponseListener<Movie>() {
+            @Override
+            public void onResponse(Movie response, int statusCode) {
+                dbManager.insertMovie(response);
+            }
+        }, new ErrorListener() {
+            @Override
+            public void onErrorResponse(Throwable t) {
+//                TODO: Show Internet Disconnection Snackbar
+            }
+
+            @Override
+            public void onErrorResponse(int statusCode) {
+//                TODO: Show Internet Disconnection Snackbar
+            }
+        });
+    }
+
     public void loadSearchedMovies(String search, int currentPage) {
         int curPage = currentPage + 1;
 
@@ -165,6 +184,9 @@ public class DataFetch {
 //                TODO: Show Internet Disconnection Snackbar
             }
         });
+    }
 
+    public ApiManager getRetrofitApi() {
+        return retrofitApi;
     }
 }
