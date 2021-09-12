@@ -1,5 +1,10 @@
 package com.chiragjn.movieman.networking;
 
+import android.content.Context;
+import android.widget.Toast;
+
+import com.chiragjn.movieman.MovieManApplication;
+import com.chiragjn.movieman.R;
 import com.chiragjn.movieman.injector.component.DaggerAppComponent;
 import com.chiragjn.movieman.networking.database.DatabaseManager;
 import com.chiragjn.movieman.networking.entity.Movie;
@@ -51,12 +56,12 @@ public class DataFetch {
         }, new ErrorListener() {
             @Override
             public void onErrorResponse(Throwable t) {
-//                TODO: Show Internet Disconnection Snackbar
+                showWorkingOffline();
             }
 
             @Override
             public void onErrorResponse(int statusCode) {
-//                TODO: Show Internet Disconnection Snackbar
+                showWorkingOffline();
             }
         });
 
@@ -86,12 +91,12 @@ public class DataFetch {
         }, new ErrorListener() {
             @Override
             public void onErrorResponse(Throwable t) {
-//                TODO: Show Internet Disconnection Snackbar
+                showWorkingOffline();
             }
 
             @Override
             public void onErrorResponse(int statusCode) {
-//                TODO: Show Internet Disconnection Snackbar
+                showWorkingOffline();
             }
         });
 
@@ -121,12 +126,12 @@ public class DataFetch {
         }, new ErrorListener() {
             @Override
             public void onErrorResponse(Throwable t) {
-//                TODO: Show Internet Disconnection Snackbar
+                showWorkingOffline();
             }
 
             @Override
             public void onErrorResponse(int statusCode) {
-//                TODO: Show Internet Disconnection Snackbar
+                showWorkingOffline();
             }
         });
 
@@ -161,17 +166,22 @@ public class DataFetch {
         }, new ErrorListener() {
             @Override
             public void onErrorResponse(Throwable t) {
-//                TODO: Show Internet Disconnection Snackbar
+                showWorkingOffline();
             }
 
             @Override
             public void onErrorResponse(int statusCode) {
-//                TODO: Show Internet Disconnection Snackbar
+                showWorkingOffline();
             }
         });
     }
 
     public ApiManager getRetrofitApi() {
         return retrofitApi;
+    }
+
+    public void showWorkingOffline() {
+        Context ctx = MovieManApplication.getAppContext();
+        Toast.makeText(ctx, ctx.getString(R.string.working_offline), Toast.LENGTH_SHORT).show();
     }
 }
