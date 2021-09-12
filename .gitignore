@@ -90,3 +90,4 @@ lint/tmp/
 
 # API Keys
 app/api.properties
+app/google-services.json

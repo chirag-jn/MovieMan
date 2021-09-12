@@ -2,6 +2,10 @@ plugins {
     id 'com.android.application'
 }
 
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.firebase-perf'
+apply plugin: 'com.google.firebase.crashlytics'
+
 android {
     compileSdkVersion 31
     buildToolsVersion "30.0.3"
@@ -113,4 +117,10 @@ dependencies {
     implementation "com.google.dagger:dagger-android-support:${dagger_version}"
     annotationProcessor "com.google.dagger:dagger-compiler:${dagger_version}"
     annotationProcessor "com.google.dagger:dagger-android-processor:${dagger_version}"
+
+//    Firebase
+    implementation 'com.google.firebase:firebase-crashlytics:18.2.1'
+    implementation 'com.google.firebase:firebase-analytics:19.0.1'
+    implementation 'com.google.firebase:firebase-auth:21.0.1'
+    implementation 'com.google.firebase:firebase-perf:20.0.2'
 }

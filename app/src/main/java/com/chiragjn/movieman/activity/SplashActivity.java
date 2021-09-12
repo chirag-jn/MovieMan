@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.view.WindowManager;
 
 import com.chiragjn.movieman.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class SplashActivity extends BaseActivity {
 
@@ -36,8 +37,11 @@ public class SplashActivity extends BaseActivity {
     }
 
     private void launchNavigation() {
-        startActivity(new Intent(this, HomeActivity.class));
-        finish();
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        auth.signInAnonymously().addOnCompleteListener(task -> {
+            startActivity(new Intent(this, HomeActivity.class));
+            finish();
+        });
     }
 
 }
