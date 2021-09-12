@@ -2,11 +2,14 @@ package com.chiragjn.movieman.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.core.content.ContextCompat;
 
 import com.chiragjn.movieman.R;
 import com.chiragjn.movieman.databinding.ActivityMovieBinding;
@@ -30,6 +33,8 @@ public class MovieActivity extends BaseActivity {
     private ActivityMovieBinding binding;
 
     private Context ctx;
+
+    private boolean isBookmarked;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +60,7 @@ public class MovieActivity extends BaseActivity {
             try {
                 String url = data.toString();
                 String[] pathArr = url.split("/");
-                movie_id = Integer.parseInt(pathArr[pathArr.length-1]);
+                movie_id = Integer.parseInt(pathArr[pathArr.length - 1]);
             } catch (Exception e) {
                 Toast.makeText(this, getString(R.string.invalid_code), Toast.LENGTH_SHORT).show();
                 this.finishAffinity();
@@ -64,7 +69,7 @@ public class MovieActivity extends BaseActivity {
             Bundle extras = getIntent().getExtras();
             if (extras != null) {
                 String value = extras.getString(MOVIE_ID_KEY);
-                if(value!=null) {
+                if (value != null) {
                     movie_id = Integer.parseInt(value);
                 } else {
                     movie_id = -1;
@@ -80,7 +85,7 @@ public class MovieActivity extends BaseActivity {
     }
 
     void populateMovie() {
-        if(movie!=null) {
+        if (movie != null) {
             binding.name.setText(movie.getTitle());
             binding.summary.setText(movie.getOverview());
             binding.share.setVisibility(View.VISIBLE);
@@ -88,7 +93,36 @@ public class MovieActivity extends BaseActivity {
                 Uri uri = Uri.parse(Endpoints.IMAGE_URL.concat(movie.getPosterPath()));
                 binding.imagePoster.setImageURI(uri);
             }
+            isMovieBookmarked();
+            handleBookmark();
         }
+    }
+
+    void isMovieBookmarked() {
+        AsyncTask.execute(() -> {
+            isBookmarked = dbManager.isMovieBookmarked(movie_id);
+            runOnUiThread(() -> {
+                if (isBookmarked) {
+                    binding.bookmark.setColorFilter(ContextCompat.getColor(ctx, R.color.bookmark), PorterDuff.Mode.SRC_IN);
+                } else {
+                    binding.bookmark.setColorFilter(ContextCompat.getColor(ctx, R.color.white), PorterDuff.Mode.SRC_IN);
+                }
+                binding.bookmark.setVisibility(View.VISIBLE);
+            });
+        });
+    }
+
+    void handleBookmark() {
+        binding.bookmark.setOnClickListener(view -> {
+            AsyncTask.execute(() -> {
+                if (isBookmarked) {
+                    dbManager.removeBookmark(movie_id);
+                } else {
+                    dbManager.addBookmark(movie_id);
+                }
+                runOnUiThread(MovieActivity.this::isMovieBookmarked);
+            });
+        });
     }
 
     void findMovie() {
@@ -111,7 +145,7 @@ public class MovieActivity extends BaseActivity {
     void setShare() {
         binding.share.setOnClickListener(view -> {
             String message = getString(R.string.refer_msg);
-            if (movie!=null) {
+            if (movie != null) {
                 message = message.concat("\n").concat(movie.getTitle());
             }
             message = message.concat("\n").concat(buildShareURL());

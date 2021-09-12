@@ -2,11 +2,7 @@ package com.chiragjn.movieman.networking.database;
 
 import android.os.AsyncTask;
 
-import androidx.lifecycle.LiveData;
-import androidx.paging.DataSource;
-import androidx.paging.LivePagedListBuilder;
-import androidx.paging.PagedList;
-
+import com.chiragjn.movieman.networking.entity.Bookmark;
 import com.chiragjn.movieman.networking.entity.Movie;
 import com.chiragjn.movieman.networking.entity.NowPlaying;
 
@@ -26,11 +22,30 @@ public class DatabaseManager {
     public void deleteAllMovies() {
         AsyncTask.execute(() -> {
             movieDb.movieDao().deleteTable();
+            movieDb.nowPlayingDao().deleteTable();
+            movieDb.trendingDayDao().deleteTable();
+            movieDb.trendingWeekDao().deleteTable();
+            // Not deleting bookmarked table so that it can be saved across refreshes
         });
     }
 
     public Movie getMoviefromId(int id) {
         return movieDb.movieDao().get(id);
+    }
+
+    public boolean isMovieBookmarked(int id) {
+        Bookmark movie = movieDb.bookmarkDao().get(id);
+        return movie != null;
+    }
+
+    public void removeBookmark(int id) {
+        movieDb.bookmarkDao().deleteEntry(id);
+    }
+
+    public void addBookmark(int id) {
+        Bookmark movie = new Bookmark();
+        movie.setId(id);
+        movieDb.bookmarkDao().insert(movie);
     }
 
     public void insertMovies(final ArrayList<Movie> movies) {

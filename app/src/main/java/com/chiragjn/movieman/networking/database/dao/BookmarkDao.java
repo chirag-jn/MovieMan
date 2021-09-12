@@ -20,6 +20,15 @@ public interface BookmarkDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insertAll(List<Bookmark> movies);
 
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    void insert(Bookmark movie);
+
     @Query("DELETE from Bookmark")
     void deleteTable();
+
+    @Query("DELETE from Bookmark WHERE id = :id")
+    void deleteEntry(int id);
+
+    @Query("SELECT * FROM Bookmark WHERE id = :id")
+    Bookmark get(int id);
 }
