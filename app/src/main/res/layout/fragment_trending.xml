@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/palette_5"
+    android:background="@color/white"
     tools:context=".fragment.TrendingFragment">
 
     <LinearLayout
@@ -16,48 +16,60 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:layout_weight="1">
 
-            <LinearLayout
-                android:id="@+id/dayBar"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="2"
+                android:background="@color/palette_5"
+                android:padding="@dimen/pad_8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
+                    android:id="@+id/search_info"
+                    style="@style/headingTextView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="start|center_vertical"
-                    android:text="@string/trending_today" />
+                    android:text="@string/trending_today"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/today_view_all"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/today_view_all"
+                    style="@style/helpTextView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="end|center_vertical"
-                    android:text="@string/trending_view_all" />
+                    android:text="@string/trending_view_all"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
                 android:id="@+id/swipeRefreshDay"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:paddingStart="@dimen/pad_8dp"
+                android:paddingEnd="@dimen/pad_8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/dayBar">
+                app:layout_constraintTop_toBottomOf="@id/toolbar">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/dayMoviesGrid"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/pad_8dp"
+                    android:layout_marginBottom="@dimen/pad_8dp"
                     android:gravity="center" />
 
             </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
@@ -67,48 +79,60 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:layout_weight="1">
 
-            <LinearLayout
-                android:id="@+id/weekBar"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/toolbar_week"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="2"
+                android:background="@color/palette_5"
+                android:padding="@dimen/pad_8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
+                    android:id="@+id/search_info_week"
+                    style="@style/headingTextView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="start|center_vertical"
-                    android:text="@string/trending_week" />
+                    android:text="@string/trending_week"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/week_view_all"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/week_view_all"
+                    style="@style/helpTextView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="end|center_vertical"
-                    android:text="@string/trending_view_all" />
+                    android:text="@string/trending_view_all"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
                 android:id="@+id/swipeRefreshWeek"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:paddingStart="@dimen/pad_8dp"
+                android:paddingEnd="@dimen/pad_8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/weekBar">
+                app:layout_constraintTop_toBottomOf="@id/toolbar_week">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/weekMoviesGrid"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/pad_8dp"
+                    android:layout_marginBottom="@dimen/pad_8dp"
                     android:gravity="center" />
 
             </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
