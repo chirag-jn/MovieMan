@@ -22,7 +22,7 @@
     </style>
 
     <style name="BottomNavigationTheme" parent="Theme.AppCompat.Light">
-        <item name="colorPrimary">@color/palette_0</item>
+        <item name="colorPrimary">@color/bookmark</item>
         <item name="android:textColorSecondary">@color/black</item>
     </style>
     

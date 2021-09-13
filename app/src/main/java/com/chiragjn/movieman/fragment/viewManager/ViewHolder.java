@@ -19,18 +19,26 @@ import com.facebook.drawee.view.SimpleDraweeView;
 
 public class ViewHolder extends RecyclerView.ViewHolder {
 
-    private final TextView popularityScore;
-    private final ImageView bookmarkBtn;
-    private final SimpleDraweeView posterImg;
+    private TextView popularityScore;
+    private ImageView bookmarkBtn;
+    private SimpleDraweeView posterImg;
+    private TextView movieYear;
+    private TextView movieTitle;
     private Movie movie;
 
-    public ViewHolder(View view, Context ctx) {
+    public ViewHolder(View view, Context ctx, int type) {
         super(view);
-        popularityScore = view.findViewById(R.id.movieRating);
-        bookmarkBtn = view.findViewById(R.id.movieBookmark);
-        posterImg = view.findViewById(R.id.movieBgd);
 
-        bookmarkBtn.setOnClickListener(v -> bookMarkOnClick(ctx));
+        if(type==0) {
+            popularityScore = view.findViewById(R.id.movieRating);
+            bookmarkBtn = view.findViewById(R.id.movieBookmark);
+            posterImg = view.findViewById(R.id.movieBgd);
+            bookmarkBtn.setOnClickListener(v -> bookMarkOnClick(ctx));
+        } else if (type==1) {
+            popularityScore = view.findViewById(R.id.movieRating);
+            movieYear = view.findViewById(R.id.movieYear);
+            movieTitle = view.findViewById(R.id.movieTitle);
+        }
 
         view.setOnClickListener(vClick -> {
             if (movie != null && movie.getId() >= 0) {
@@ -42,18 +50,25 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         });
     }
 
-    public void setValues(Movie movie) {
+    public void setValues(Movie movie, int type) {
         if (movie != null) {
             this.movie = movie;
-            String avgVote = movie.getVoteAverage() + "";
-            popularityScore.setText(avgVote);
 
-            if (movie.getPosterPath() != null && movie.getPosterPath().length() > 0) {
-                Uri uri = Uri.parse(Endpoints.IMAGE_URL.concat(movie.getPosterPath()));
+            String avgVote = movie.getRating() + "";
 
-                posterImg.setImageURI(uri);
-            } else {
+            if(type==0) {
+                popularityScore.setText(avgVote);
+
+                if (movie.getPosterPath() != null && movie.getPosterPath().length() > 0) {
+                    Uri uri = Uri.parse(Endpoints.IMAGE_URL.concat(movie.getPosterPath()));
+                    posterImg.setImageURI(uri);
+                } else {
 //                    TODO: Set placeholder image
+                }
+            } else if(type==1) {
+                popularityScore.setText(avgVote);
+                movieTitle.setText(movie.getTitle());
+                movieYear.setText(movie.getYear());
             }
         }
     }

@@ -166,6 +166,15 @@ public class Movie {
         return voteAverage;
     }
 
+    public String getRating() {
+        return String.format("%.2f", voteAverage/2);
+    }
+
+    public String getYear() {
+        String str = releaseDate;
+        return str.split("-")[0];
+    }
+
     public void setVoteAverage(float voteAverage) {
         this.voteAverage = voteAverage;
     }

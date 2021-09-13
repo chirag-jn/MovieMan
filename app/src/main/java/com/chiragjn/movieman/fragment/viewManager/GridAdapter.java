@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,7 +33,7 @@ public class GridAdapter extends PagedListAdapter<Movie, ViewHolder> {
     ArrayList<Movie> movieList;
     LayoutInflater inflater;
 
-    int viewType;
+    int viewNum;
 
     private static final DiffUtil.ItemCallback<Movie> DIFF_CALLBACK = new DiffUtil.ItemCallback<Movie>() {
         @Override
@@ -46,10 +47,10 @@ public class GridAdapter extends PagedListAdapter<Movie, ViewHolder> {
         }
     };
 
-    public GridAdapter(Context ctx, int viewType) {
+    public GridAdapter(Context ctx, int viewNum) {
         super(DIFF_CALLBACK);
         this.ctx = ctx;
-        this.viewType = viewType;
+        this.viewNum = viewNum;
         movieList = new ArrayList<>();
         inflater = LayoutInflater.from(ctx);
     }
@@ -74,22 +75,26 @@ public class GridAdapter extends PagedListAdapter<Movie, ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view;
-        switch (viewType) {
+        Log.v("Chirag", "hi there " + viewNum );
+
+        switch (viewNum) {
             case 0:
+                Log.v("Chirag", "hi there " + viewNum );
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.movie_item, parent, false);
                 break;
             case 1:
-                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.movie_item, parent, false);
+                Log.v("Chirag", "hi there " + viewNum );
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.movie_search_item, parent, false);
                 break;
             default:
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.movie_item, parent, false);
                 break;
         }
-        return new ViewHolder(view, ctx);
+        return new ViewHolder(view, ctx, viewNum);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.setValues(getItem(position));
+        holder.setValues(getItem(position), viewNum);
     }
 }

@@ -43,7 +43,7 @@ public class SearchFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         MovieViewModel viewModel = new ViewModelProvider(this).get(MovieViewModel.class);
-        adapter = new GridAdapter(getContext(), 0);
+        adapter = new GridAdapter(getContext(), 1);
         viewModel.getSearchedMoviesPaged().observe(this, adapter::submitList);
     }
 
