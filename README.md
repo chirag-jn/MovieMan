@@ -1,5 +1,5 @@
 <p align="center">
-  <img alt="Movie Man" title="Movie Man" src="./readme/banner.png" width="500">
+  <img alt="Movie Man" title="Movie Man" src="./readme/banner.png" width="750">
 </p>
 
 ## Features
@@ -34,6 +34,11 @@
 1. Create "The MovieDataBase" API v3 keys by following the steps present [here](https://developers.themoviedb.org/3/getting-started/introduction).
 2. Create a copy of `app/fakeapi.properties` and keep it as `app/api.properties`.
 3. In `api.properties`, modify the `key` parameter's value and put the API key obtained above in Step 1.
+
+## Screenshots
+| <img src="./readme/splash.jpg" width="250"> | <img src="./readme/now_playing.jpg" width="250"> | <img src="./readme/trending.jpg" width="250"> |
+| <img src="./readme/trending_today.jpg" width="250"> | <img src="./readme/movie_view.jpg" width="250"> | <img src="./readme/bookmarked_movie.jpg" width="250"> |
+| <img src="./readme/bookmark.jpg" width="250"> | <img src="./readme/search.jpg" width="250"> | <img src="./readme/movie_share.jpg" width="250"> |
 
 ## Author
 Chirag Jain
