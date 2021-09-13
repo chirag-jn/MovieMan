@@ -28,7 +28,7 @@
             android:scaleType="centerCrop"
             android:src="@drawable/logo_movieman"
             fresco:actualImageScaleType="centerCrop"
-            fresco:fadeDuration="100"
+            fresco:fadeDuration="50"
             fresco:failureImage="@drawable/logo_movieman"
             fresco:placeholderImage="@drawable/logo_movieman"
             fresco:viewAspectRatio="0.67" />
