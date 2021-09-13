@@ -10,7 +10,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/palette_5"
+        android:background="@color/white"
         android:scrollbars="none"
         tools:context=".activity.MovieActivity">
 
@@ -42,8 +42,9 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/margin_16dp"
-                    android:textColor="@color/palette_1"
+                    android:textColor="@color/palette_5"
                     android:textSize="@dimen/text_18sp"
+                    android:fontFamily="@font/poppins_semi_bold"
                     app:layout_constraintEnd_toStartOf="@id/bookmark"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -65,14 +66,71 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <LinearLayout
+                android:id="@+id/star_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:paddingTop="@dimen/pad_4dp"
+                android:paddingBottom="@dimen/pad_4dp"
+                android:paddingStart="@dimen/pad_8dp"
+                android:paddingEnd="@dimen/pad_8dp"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@id/nameLayout">
+
+                <ImageButton
+                    android:id="@+id/star_image1"
+                    style="@style/StarImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <ImageButton
+                    android:id="@+id/star_image2"
+                    style="@style/StarImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <ImageButton
+                    android:id="@+id/star_image3"
+                    style="@style/StarImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <ImageButton
+                    android:id="@+id/star_image4"
+                    style="@style/StarImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <ImageButton
+                    android:id="@+id/star_image5"
+                    style="@style/StarImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/starRatingText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/poppins_light"
+                    android:text="@string/default_rating"
+                    android:textColor="@color/palette_4"
+                    android:gravity="center_vertical"
+                    android:paddingStart="@dimen/pad_4dp"
+                    android:paddingEnd="0dp"
+                    android:textSize="@dimen/text_16sp"/>
+
+            </LinearLayout>
+
             <TextView
                 android:id="@+id/summary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/margin_16dp"
-                android:textColor="@color/palette_1"
+                android:textColor="@color/palette_4"
                 android:textSize="@dimen/text_16sp"
-                app:layout_constraintTop_toBottomOf="@id/nameLayout"
+                android:fontFamily="@font/poppins_light"
+                app:layout_constraintTop_toBottomOf="@id/star_layout"
                 tools:text="@string/movie_description" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

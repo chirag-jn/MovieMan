@@ -99,11 +99,30 @@ public class MovieActivity extends BaseActivity {
                 Uri uri = Uri.parse(Endpoints.IMAGE_URL.concat(movie.getPosterPath()));
                 binding.imagePoster.setImageURI(uri);
             }
+            setRating();
             isMovieBookmarked();
             handleBookmark();
         } else {
             Toast.makeText(ctx, getString(R.string.invalid_code), Toast.LENGTH_SHORT).show();
             this.finishAffinity();
+        }
+    }
+
+    void setRating() {
+        String rate = movie.getRating();
+        binding.starRatingText.setText(rate);
+        float rating = Float.parseFloat(rate);
+        if (rating <= 4) {
+            binding.starImage5.setVisibility(View.GONE);
+        }
+        if (rating <= 3) {
+            binding.starImage4.setVisibility(View.GONE);
+        }
+        if (rating <= 2) {
+            binding.starImage3.setVisibility(View.GONE);
+        }
+        if (rating <= 1) {
+            binding.starImage2.setVisibility(View.GONE);
         }
     }
 

@@ -2,12 +2,12 @@
     <!-- Base application theme. -->
     <style name="Theme.MovieMan" parent="Theme.AppCompat.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimary">@color/palette_4</item>
+        <item name="colorPrimaryVariant">@color/palette_5</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorSecondary">@color/palette_3</item>
+        <item name="colorSecondaryVariant">@color/palette_2</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
@@ -43,5 +43,12 @@
         <item name="android:fontFamily">@font/poppins_light</item>
         <item name="android:layout_margin">@dimen/margin_12dp</item>
         <item name="android:padding">@dimen/pad_4dp</item>
+    </style>
+
+    <style name="StarImage" parent="Widget.AppCompat.ImageButton">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:src">@drawable/ic_star_fill</item>
+        <item name="tint">@color/bookmark</item>
+        <item name="android:contentDescription">@string/star</item>
     </style>
 </resources>
