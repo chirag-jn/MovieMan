@@ -11,7 +11,7 @@
         android:id="@+id/movieYear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/rating_desc"
+        android:contentDescription="@string/movie_year"
         android:fontFamily="@font/poppins_light"
         android:paddingStart="@dimen/movie_grid_rating_pad"
         android:paddingEnd="@dimen/movie_grid_rating_pad"
@@ -51,30 +51,31 @@
         android:id="@+id/space2"
         android:layout_width="1dp"
         android:layout_height="0dp"
-        android:visibility="invisible"
         android:layout_marginStart="@dimen/margin_2dp"
         android:layout_marginEnd="@dimen/margin_2dp"
         android:background="@color/hint_color"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@id/movieTitle"
+        app:layout_constraintEnd_toEndOf="@id/star_layout"
         app:layout_constraintStart_toEndOf="@id/movieTitle"
-        app:layout_constraintTop_toTopOf="@id/movieTitle"
-        app:layout_constraintEnd_toEndOf="@id/star_layout"/>
+        app:layout_constraintTop_toTopOf="@id/movieTitle" />
 
     <LinearLayout
         android:id="@+id/star_layout"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
         android:gravity="center"
-        app:layout_constraintTop_toTopOf="parent"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/space2">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/space2"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/star_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/star"
             android:src="@drawable/ic_star_fill"
             app:tint="@color/bookmark" />
 
@@ -82,12 +83,13 @@
             android:id="@+id/movieRating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/text_14sp"
-            android:text="@string/default_rating"
-            android:fontFamily="@font/poppins_light"
             android:layout_marginStart="@dimen/margin_2dp"
             android:layout_marginEnd="@dimen/margin_2dp"
-            android:textColor="@color/hint_color"/>
+            android:contentDescription="@string/rating"
+            android:fontFamily="@font/poppins_light"
+            android:text="@string/default_rating"
+            android:textColor="@color/hint_color"
+            android:textSize="@dimen/text_14sp" />
 
     </LinearLayout>
 

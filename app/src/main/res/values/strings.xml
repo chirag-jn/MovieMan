@@ -36,6 +36,9 @@
 <!--    Search-->
     <string name="enter_more_than_three">Please enter more than 3 characters.</string>
     <string name="showing_results_for">Showing results for: </string>
+    <string name="star">Star</string>
+    <string name="rating">Rating</string>
+    <string name="movie_year">Movie Year</string>
 
 <!--    Internet-->
     <string name="working_offline">Working Offline</string>
