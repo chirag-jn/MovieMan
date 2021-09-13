@@ -9,11 +9,12 @@
     <color name="white">#FFFFFFFF</color>
 
 <!--    Palette-->
-    <color name="palette_1">#F5E3E0</color>
-    <color name="palette_2">#610094</color>
-    <color name="palette_3">#3F0071</color>
-    <color name="palette_4">#150050</color>
-    <color name="palette_5">#000000</color>
+    <color name="palette_0">#E7165A</color>
+    <color name="palette_1">#BE1C68</color>
+    <color name="palette_2">#9F206F</color>
+    <color name="palette_3">#8E2375</color>
+    <color name="palette_4">#522B86</color>
+    <color name="palette_5">#333290</color>
 
     <color name="bookmark">#FF0000</color>
 
