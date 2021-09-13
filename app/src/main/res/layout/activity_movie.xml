@@ -47,21 +47,42 @@
                     android:text="@string/movie_name"
                     android:textColor="@color/palette_5"
                     android:textSize="@dimen/text_18sp"
-                    app:layout_constraintEnd_toStartOf="@id/bookmark"
+                    app:layout_constraintEnd_toStartOf="@id/share"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/share"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_16dp"
+                    android:layout_marginTop="@dimen/margin_16dp"
+                    android:layout_marginEnd="@dimen/pad_4dp"
+                    android:layout_marginBottom="@dimen/margin_16dp"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/movie_share"
+                    android:src="@drawable/ic_share"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="@id/name"
+                    app:layout_constraintEnd_toStartOf="@id/bookmark"
+                    app:layout_constraintStart_toEndOf="@id/name"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/palette_3" />
 
                 <ImageButton
                     android:id="@+id/bookmark"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/margin_16dp"
+                    android:layout_marginStart="@dimen/pad_4dp"
+                    android:layout_marginTop="@dimen/margin_16dp"
+                    android:layout_marginEnd="@dimen/margin_16dp"
+                    android:layout_marginBottom="@dimen/margin_16dp"
                     android:background="@drawable/ic_bookmark_btn_bg"
                     android:contentDescription="@string/movie_bookmark"
                     android:src="@drawable/ic_bookmark_btn"
                     app:layout_constraintBottom_toBottomOf="@id/name"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/name"
+                    app:layout_constraintStart_toEndOf="@id/share"
                     app:layout_constraintTop_toTopOf="@id/name"
                     app:tint="@color/white" />
 
@@ -210,20 +231,6 @@
             android:src="@drawable/ic_arrow_left"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/white" />
-
-        <ImageButton
-            android:id="@+id/share"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_16dp"
-            android:background="@android:color/transparent"
-            android:contentDescription="@string/movie_share"
-            android:src="@drawable/ic_share"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:tint="@color/white" />
 
