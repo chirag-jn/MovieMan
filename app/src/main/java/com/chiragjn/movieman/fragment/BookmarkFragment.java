@@ -10,13 +10,12 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chiragjn.movieman.databinding.FragmentBookmarkBinding;
 import com.chiragjn.movieman.fragment.viewManager.GridAdapter;
 import com.chiragjn.movieman.networking.viewmodel.MovieViewModel;
-import com.chiragjn.movieman.utils.Constants;
 
 public class BookmarkFragment extends Fragment {
 
@@ -32,7 +31,7 @@ public class BookmarkFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         MovieViewModel viewModel = new ViewModelProvider(this).get(MovieViewModel.class);
-        adapter = new GridAdapter(getContext(), 0);
+        adapter = new GridAdapter(getContext(), 2);
         viewModel.getAllBookmarkMoviesPaged().observe(this, adapter::submitList);
     }
 
@@ -51,7 +50,7 @@ public class BookmarkFragment extends Fragment {
 
         RecyclerView gridView = binding.moviesGrid;
 
-        gridView.setLayoutManager(new GridLayoutManager(getActivity(), Constants.COLUMNS));
+        gridView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         gridView.setItemAnimator(new DefaultItemAnimator());
         gridView.setHasFixedSize(false);
 

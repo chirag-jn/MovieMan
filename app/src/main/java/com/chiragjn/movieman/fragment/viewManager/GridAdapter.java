@@ -75,16 +75,12 @@ public class GridAdapter extends PagedListAdapter<Movie, ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view;
-        Log.v("Chirag", "hi there " + viewNum );
-
         switch (viewNum) {
-            case 0:
-                Log.v("Chirag", "hi there " + viewNum );
-                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.movie_item, parent, false);
-                break;
             case 1:
-                Log.v("Chirag", "hi there " + viewNum );
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.movie_search_item, parent, false);
+                break;
+            case 2:
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.movie_bookmark_item, parent, false);
                 break;
             default:
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.movie_item, parent, false);

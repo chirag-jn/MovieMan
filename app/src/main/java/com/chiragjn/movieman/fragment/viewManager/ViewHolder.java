@@ -50,6 +50,14 @@ public class ViewHolder extends RecyclerView.ViewHolder {
             popularityScore = view.findViewById(R.id.movieRating);
             movieYear = view.findViewById(R.id.movieYear);
             movieTitle = view.findViewById(R.id.movieTitle);
+        } else if (type == 2) {
+            posterImg = view.findViewById(R.id.movieBgd);
+            movieYear = view.findViewById(R.id.movieYear);
+            movieTitle = view.findViewById(R.id.movieTitle);
+            star2 = view.findViewById(R.id.star_image2);
+            star3 = view.findViewById(R.id.star_image3);
+            star4 = view.findViewById(R.id.star_image4);
+            star5 = view.findViewById(R.id.star_image5);
         }
 
         view.setOnClickListener(vClick -> {
@@ -81,6 +89,14 @@ public class ViewHolder extends RecyclerView.ViewHolder {
                 popularityScore.setText(avgVote);
                 movieTitle.setText(movie.getTitle());
                 movieYear.setText(movie.getYear());
+            } else if (type == 2) {
+                if (movie.getPosterPath() != null && movie.getPosterPath().length() > 0) {
+                    Uri uri = Uri.parse(Endpoints.IMAGE_URL.concat(movie.getPosterPath()));
+                    posterImg.setImageURI(uri);
+                }
+                movieTitle.setText(movie.getTitle());
+                movieYear.setText(movie.getYear());
+                setStars(Float.parseFloat(avgVote));
             }
         }
     }

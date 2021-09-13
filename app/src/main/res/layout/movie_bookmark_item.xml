@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_gravity="center_vertical"
+    android:background="@color/white"
+    android:padding="@dimen/movie_grid_pad">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/movieBgdCard"
+        android:layout_width="100dp"
+        android:layout_height="0dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="@dimen/btn_back_border_thickness"
+        app:layout_constraintDimensionRatio="1:1.5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/movieBgd"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:contentDescription="@string/movie_desc"
+            android:scaleType="centerCrop"
+            android:src="@drawable/logo_movieman"
+            fresco:actualImageScaleType="centerCrop"
+            fresco:fadeDuration="50"
+            fresco:failureImage="@drawable/logo_movieman"
+            fresco:placeholderImage="@drawable/logo_movieman"
+            fresco:viewAspectRatio="0.67" />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/movieTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_16dp"
+        android:contentDescription="@string/rating_desc"
+        android:fontFamily="@font/poppins_semi_bold"
+        android:paddingEnd="@dimen/movie_grid_rating_pad"
+        android:paddingStart="0dp"
+        android:text="@string/default_rating"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_18sp"
+        app:layout_constraintBottom_toTopOf="@+id/movieYear"
+        app:layout_constraintStart_toEndOf="@+id/movieBgdCard"
+        app:layout_constraintTop_toTopOf="@+id/movieBgdCard" />
+
+    <TextView
+        android:id="@+id/movieYear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/movie_year"
+        android:fontFamily="@font/poppins_light"
+        android:paddingEnd="@dimen/movie_grid_rating_pad"
+        android:text="@string/default_rating"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/movieBgdCard"
+        app:layout_constraintStart_toStartOf="@+id/movieTitle"
+        app:layout_constraintTop_toTopOf="@+id/movieBgdCard" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginEnd="@dimen/margin_32dp"
+        android:orientation="horizontal"
+        android:weightSum="5"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/movieTitle"
+        app:layout_constraintTop_toBottomOf="@+id/movieYear">
+
+        <ImageButton
+            android:id="@+id/star_image1"
+            style="@style/StarImage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <ImageButton
+            android:id="@+id/star_image2"
+            style="@style/StarImage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <ImageButton
+            android:id="@+id/star_image3"
+            style="@style/StarImage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <ImageButton
+            android:id="@+id/star_image4"
+            style="@style/StarImage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <ImageButton
+            android:id="@+id/star_image5"
+            style="@style/StarImage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
