@@ -45,6 +45,18 @@
         <item name="android:padding">@dimen/pad_4dp</item>
     </style>
 
+    <style name="headingTextView" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/text_18sp</item>
+        <item name="android:fontFamily">@font/poppins_semi_bold</item>
+        <item name="android:layout_marginStart">@dimen/pad_4dp</item>
+        <item name="android:layout_marginEnd">@dimen/margin_12dp</item>
+        <item name="android:layout_marginTop">@dimen/margin_8dp</item>
+        <item name="android:layout_marginBottom">@dimen/margin_8dp</item>
+        <item name="android:paddingStart">@dimen/pad_4dp</item>
+        <item name="android:paddingEnd">@dimen/pad_4dp</item>
+    </style>
+
     <style name="StarImage" parent="Widget.AppCompat.ImageButton">
         <item name="android:background">@android:color/transparent</item>
         <item name="android:src">@drawable/ic_star_fill</item>
