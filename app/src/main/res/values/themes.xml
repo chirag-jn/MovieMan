@@ -38,7 +38,7 @@
     </style>
 
     <style name="helpTextView" parent="Widget.AppCompat.TextView">
-        <item name="android:textColor">@color/hint_color</item>
+        <item name="android:textColor">@color/white</item>
         <item name="android:textSize">@dimen/text_14sp</item>
         <item name="android:fontFamily">@font/poppins_light</item>
         <item name="android:layout_margin">@dimen/margin_12dp</item>
