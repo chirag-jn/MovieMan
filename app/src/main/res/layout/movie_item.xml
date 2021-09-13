@@ -2,38 +2,92 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:padding="@dimen/movie_grid_pad">
 
-    <com.facebook.drawee.view.SimpleDraweeView
-        android:id="@+id/movieBgd"
-        android:layout_width="120dp"
-        android:layout_height="180dp"
-        android:background="@color/white"
-        android:contentDescription="@string/movie_desc"
-        android:scaleType="fitXY"
-        android:src="@drawable/logo_movieman"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/movieBgdCard"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="@dimen/btn_back_border_thickness"
+        app:layout_constraintDimensionRatio="1:1.5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        fresco:actualImageScaleType="centerCrop"
-        fresco:fadeDuration="100"
-        fresco:failureImage="@drawable/logo_movieman"
-        fresco:placeholderImage="@drawable/logo_movieman"
-        fresco:viewAspectRatio="0.67" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <ImageView
-        android:layout_width="120dp"
-        android:layout_height="180dp"
-        android:contentDescription="@string/movie_desc"
-        android:src="@drawable/ic_gradient"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/movieBgd"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:contentDescription="@string/movie_desc"
+            android:scaleType="centerCrop"
+            android:src="@drawable/logo_movieman"
+            fresco:actualImageScaleType="centerCrop"
+            fresco:fadeDuration="100"
+            fresco:failureImage="@drawable/logo_movieman"
+            fresco:placeholderImage="@drawable/logo_movieman"
+            fresco:viewAspectRatio="0.67" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/movie_desc"
+            android:src="@drawable/ic_gradient"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="5"
+            android:layout_gravity="bottom"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/star_image1"
+                style="@style/StarImage"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+
+            <ImageButton
+                android:id="@+id/star_image2"
+                style="@style/StarImage"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+
+            <ImageButton
+                android:id="@+id/star_image3"
+                style="@style/StarImage"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+
+            <ImageButton
+                android:id="@+id/star_image4"
+                style="@style/StarImage"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+
+            <ImageButton
+                android:id="@+id/star_image5"
+                style="@style/StarImage"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
 
     <ImageButton
         android:id="@+id/movieBookmark"
@@ -42,9 +96,9 @@
         android:background="@drawable/ic_bookmark_btn_bg"
         android:contentDescription="@string/bookmark_desc"
         android:src="@drawable/ic_bookmark_btn"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/movieBgd"
-        app:layout_constraintEnd_toEndOf="@id/movieBgd" />
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/movieBgdCard"
+        app:layout_constraintEnd_toEndOf="@id/movieBgdCard" />
 
     <TextView
         android:id="@+id/movieRating"
@@ -54,10 +108,11 @@
         android:paddingStart="@dimen/movie_grid_rating_pad"
         android:paddingEnd="@dimen/movie_grid_rating_pad"
         android:text="@string/default_rating"
+        android:visibility="gone"
         android:textColor="@color/white"
         android:textSize="@dimen/movie_grid_rating_size"
         app:layout_constraintBottom_toBottomOf="@+id/movieBookmark"
-        app:layout_constraintStart_toStartOf="@id/movieBgd"
+        app:layout_constraintStart_toStartOf="@id/movieBgdCard"
         app:layout_constraintTop_toTopOf="@+id/movieBookmark" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
