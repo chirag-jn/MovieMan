@@ -6,6 +6,7 @@ import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -96,10 +97,9 @@ public class MovieActivity extends BaseActivity {
             binding.summary.setText(movie.getOverview());
             binding.share.setVisibility(View.VISIBLE);
             if (movie.getPosterPath() != null && movie.getPosterPath().length() > 0) {
+                Log.v("Chirag", "hello there why");
                 Uri uri = Uri.parse(Endpoints.IMAGE_URL.concat(movie.getPosterPath()));
                 binding.imagePoster.setImageURI(uri);
-            } else {
-
             }
             if (!movie.isAdult()) {
                 binding.plus18Text.setVisibility(View.INVISIBLE);
@@ -149,16 +149,14 @@ public class MovieActivity extends BaseActivity {
     }
 
     void handleBookmark() {
-        binding.bookmark.setOnClickListener(view -> {
-            AsyncTask.execute(() -> {
-                if (isBookmarked) {
-                    dbManager.removeBookmark(movie_id);
-                } else {
-                    dbManager.addBookmark(movie_id);
-                }
-                runOnUiThread(MovieActivity.this::isMovieBookmarked);
-            });
-        });
+        binding.bookmark.setOnClickListener(view -> AsyncTask.execute(() -> {
+            if (isBookmarked) {
+                dbManager.removeBookmark(movie_id);
+            } else {
+                dbManager.addBookmark(movie_id);
+            }
+            runOnUiThread(MovieActivity.this::isMovieBookmarked);
+        }));
     }
 
     void findMovie() {
