@@ -47,7 +47,6 @@ public class NowPlayingFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        fetcher.loadNowPlayingItems(0);
         binding = FragmentNowPlayingBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
@@ -56,6 +55,7 @@ public class NowPlayingFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        fetcher.loadNowPlayingItems(0);
 //        binding.swipeRefresh.setRefreshing(true);
 
         RecyclerView gridView = binding.moviesGrid;

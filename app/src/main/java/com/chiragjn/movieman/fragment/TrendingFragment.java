@@ -53,8 +53,6 @@ public class TrendingFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        fetcher.loadTrendingDayItems(0);
-        fetcher.loadTrendingWeekItems(0);
         binding = FragmentTrendingBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
@@ -63,6 +61,8 @@ public class TrendingFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        fetcher.loadTrendingDayItems(0);
+        fetcher.loadTrendingWeekItems(0);
 //        binding.swipeRefreshDay.setRefreshing(true);
 //        binding.swipeRefreshWeek.setRefreshing(true);
 
