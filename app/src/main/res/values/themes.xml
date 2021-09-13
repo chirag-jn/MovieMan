@@ -25,4 +25,23 @@
         <item name="colorPrimary">@color/palette_0</item>
         <item name="android:textColorSecondary">@color/black</item>
     </style>
+    
+    <style name="searchEditText" parent="Widget.AppCompat.EditText">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/text_18sp</item>
+        <item name="android:fontFamily">@font/poppins_semi_bold</item>
+        <item name="android:layout_margin">@dimen/margin_16dp</item>
+        <item name="android:paddingTop">@dimen/pad_4dp</item>
+        <item name="android:paddingBottom">@dimen/pad_4dp</item>
+        <item name="android:paddingStart">@dimen/pad_8dp</item>
+        <item name="android:paddingEnd">@dimen/pad_8dp</item>
+    </style>
+
+    <style name="helpTextView" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/hint_color</item>
+        <item name="android:textSize">@dimen/text_14sp</item>
+        <item name="android:fontFamily">@font/poppins_light</item>
+        <item name="android:layout_margin">@dimen/margin_12dp</item>
+        <item name="android:padding">@dimen/pad_4dp</item>
+    </style>
 </resources>

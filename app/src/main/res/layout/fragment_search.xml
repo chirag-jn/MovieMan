@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/palette_5"
+    android:background="@color/white"
     tools:context=".fragment.SearchFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -13,10 +13,13 @@
 
         <EditText
             android:id="@+id/searchBox"
+            style="@style/searchEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/search_edittext_bgd"
             android:digits=" 0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM/"
             android:hint="@string/search"
+            android:textColorHint="@color/hint_color"
             android:inputType="text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -24,6 +27,7 @@
 
         <TextView
             android:id="@+id/search_info"
+            style="@style/helpTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/enter_more_than_three"

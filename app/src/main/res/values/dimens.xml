@@ -7,8 +7,13 @@
 
     <dimen name="movie_grid_pad">6dp</dimen>
 
-<!--    Movie View-->
+    <dimen name="btn_back_border_thickness">1dp</dimen>
+    <dimen name="margin_12dp">12dp</dimen>
     <dimen name="margin_16dp">16dp</dimen>
+    <dimen name="pad_4dp">4dp</dimen>
+    <dimen name="pad_8dp">8dp</dimen>
     <dimen name="text_18sp">18sp</dimen>
     <dimen name="text_16sp">16sp</dimen>
+    <dimen name="text_14sp">14sp</dimen>
+    <dimen name="margin_8dp">8dp</dimen>
 </resources>
