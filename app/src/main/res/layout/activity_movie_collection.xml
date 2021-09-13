@@ -66,4 +66,20 @@
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/move_to_top_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="16dp"
+        android:background="@android:color/transparent"
+        android:backgroundTint="@color/white"
+        android:contentDescription="@string/move_to_top"
+        android:src="@drawable/ic_top_arrow"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar"
+        app:rippleColor="@color/palette_1" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

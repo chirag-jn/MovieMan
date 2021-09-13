@@ -64,9 +64,11 @@ public class NowPlayingFragment extends Fragment {
             if (count > 0) {
                 binding.swipeRefresh.setVisibility(View.VISIBLE);
                 binding.emptyListHead.setVisibility(View.GONE);
+                binding.moveToTopBtn.setVisibility(View.VISIBLE);
             } else {
                 binding.swipeRefresh.setVisibility(View.GONE);
                 binding.emptyListHead.setVisibility(View.VISIBLE);
+                binding.moveToTopBtn.setVisibility(View.GONE);
             }
         }
     }
@@ -92,6 +94,8 @@ public class NowPlayingFragment extends Fragment {
         gridView.setHasFixedSize(false);
 
         gridView.setAdapter(adapter);
+
+        binding.moveToTopBtn.setOnClickListener(view1 -> gridView.smoothScrollToPosition(0));
 
 //        binding.swipeRefresh.setRefreshing(false);
 

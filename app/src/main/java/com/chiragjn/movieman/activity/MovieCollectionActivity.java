@@ -111,6 +111,8 @@ public class MovieCollectionActivity extends BaseActivity {
 
         gridView.setAdapter(adapter);
 
+        binding.moveToTopBtn.setOnClickListener(view1 -> gridView.smoothScrollToPosition(0));
+
         binding.swipeRefresh.setRefreshing(false);
 
         setSwipeRefresh();
