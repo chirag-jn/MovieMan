@@ -17,6 +17,8 @@
     <string name="trending_today">Today</string>
     <string name="trending_week">This Week</string>
     <string name="trending_view_all">View All >>></string>
+    <string name="trending_day_heading">Trending Today</string>
+    <string name="trending_week_heading">Trending This Week</string>
 
     <!--    Movie View-->
     <string name="movie_name">Movie Name</string>

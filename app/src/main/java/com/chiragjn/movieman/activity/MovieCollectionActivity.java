@@ -79,6 +79,19 @@ public class MovieCollectionActivity extends BaseActivity {
         });
     }
 
+    void setHeading() {
+        switch (type) {
+            case 0:
+                binding.headingInfo.setText(getString(R.string.trending_day_heading));
+                break;
+            case 1:
+                binding.headingInfo.setText(getString(R.string.trending_week_heading));
+                break;
+            default:
+                break;
+        }
+    }
+
     @Override
     void bindView() {
         binding = ActivityMovieCollectionBinding.inflate(getLayoutInflater());
@@ -87,6 +100,7 @@ public class MovieCollectionActivity extends BaseActivity {
 
         binding.swipeRefresh.setRefreshing(true);
 
+        setHeading();
         setAdapter();
 
         RecyclerView gridView = binding.moviesGrid;
