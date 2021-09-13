@@ -91,3 +91,9 @@ lint/tmp/
 # API Keys
 app/api.properties
 app/google-services.json
+
+# VS Code
+.code/
+.project
+.settings/
+app/.classpath
