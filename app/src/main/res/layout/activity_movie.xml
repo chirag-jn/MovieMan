@@ -28,6 +28,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 fresco:actualImageScaleType="centerCrop"
                 fresco:fadeDuration="100"
+                fresco:failureImage="@drawable/logo_movieman"
                 fresco:placeholderImage="@drawable/logo_movieman"
                 fresco:viewAspectRatio="0.67" />
 
@@ -43,12 +44,12 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_semi_bold"
                     android:padding="@dimen/margin_16dp"
+                    android:text="@string/movie_name"
                     android:textColor="@color/palette_5"
                     android:textSize="@dimen/text_18sp"
                     app:layout_constraintEnd_toStartOf="@id/bookmark"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="@string/movie_name" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageButton
                     android:id="@+id/bookmark"
@@ -76,10 +77,10 @@
                 android:paddingTop="@dimen/pad_4dp"
                 android:paddingEnd="@dimen/pad_8dp"
                 android:paddingBottom="@dimen/pad_4dp"
+                app:layout_constraintBottom_toBottomOf="@id/plus18Text"
                 app:layout_constraintEnd_toStartOf="@id/plus18Text"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/nameLayout"
-                app:layout_constraintBottom_toBottomOf="@id/plus18Text">
+                app:layout_constraintTop_toBottomOf="@id/nameLayout">
 
                 <ImageButton
                     android:id="@+id/star_image1"
@@ -120,7 +121,7 @@
                     android:paddingStart="@dimen/pad_4dp"
                     android:paddingEnd="0dp"
                     android:text="@string/default_rating"
-                    android:textColor="@color/palette_4"
+                    android:textColor="@color/palette_3"
                     android:textSize="@dimen/text_16sp" />
 
             </LinearLayout>
@@ -140,16 +141,52 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/nameLayout" />
 
+            <LinearLayout
+                android:id="@+id/releaseLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/star_layout">
+
+                <TextView
+                    android:id="@+id/releaseDateHead"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_light"
+                    android:paddingStart="@dimen/margin_12dp"
+                    android:paddingTop="@dimen/pad_4dp"
+                    android:paddingEnd="@dimen/pad_2dp"
+                    android:paddingBottom="@dimen/pad_4dp"
+                    android:text="@string/release_date_head"
+                    android:textColor="@color/palette_3"
+                    android:textSize="@dimen/text_14sp" />
+
+                <TextView
+                    android:id="@+id/releaseDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_light"
+                    android:paddingStart="@dimen/pad_2dp"
+                    android:paddingTop="@dimen/pad_4dp"
+                    android:paddingEnd="@dimen/margin_16dp"
+                    android:paddingBottom="@dimen/pad_4dp"
+                    android:text="@string/release_not_available"
+                    android:textColor="@color/palette_3"
+                    android:textSize="@dimen/text_14sp" />
+
+            </LinearLayout>
+
             <TextView
                 android:id="@+id/summary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_light"
                 android:padding="@dimen/margin_16dp"
+                android:text="@string/movie_description"
                 android:textColor="@color/palette_4"
                 android:textSize="@dimen/text_16sp"
-                app:layout_constraintTop_toBottomOf="@id/star_layout"
-                tools:text="@string/movie_description" />
+                app:layout_constraintTop_toBottomOf="@id/releaseLayout" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

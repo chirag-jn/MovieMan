@@ -98,9 +98,14 @@ public class MovieActivity extends BaseActivity {
             if (movie.getPosterPath() != null && movie.getPosterPath().length() > 0) {
                 Uri uri = Uri.parse(Endpoints.IMAGE_URL.concat(movie.getPosterPath()));
                 binding.imagePoster.setImageURI(uri);
+            } else {
+
             }
             if (!movie.isAdult()) {
                 binding.plus18Text.setVisibility(View.INVISIBLE);
+            }
+            if (movie.getReleaseDate()!=null && movie.getReleaseDate().length() > 0) {
+                binding.releaseDate.setText(movie.getReleaseDate());
             }
             setRating();
             isMovieBookmarked();
