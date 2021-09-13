@@ -24,6 +24,7 @@
     <string name="movie_back">Back</string>
     <string name="movie_share">Share</string>
     <string name="movie_bookmark">Bookmark</string>
+    <string name="plus18">18+</string>
 
     <!--    Share-->
     <string name="movie_view_ref_code">@string/app_name</string>

@@ -99,6 +99,9 @@ public class MovieActivity extends BaseActivity {
                 Uri uri = Uri.parse(Endpoints.IMAGE_URL.concat(movie.getPosterPath()));
                 binding.imagePoster.setImageURI(uri);
             }
+            if (!movie.isAdult()) {
+                binding.plus18Text.setVisibility(View.INVISIBLE);
+            }
             setRating();
             isMovieBookmarked();
             handleBookmark();
