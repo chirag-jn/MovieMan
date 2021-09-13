@@ -67,7 +67,6 @@ public class SearchFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable editable) {
-//                binding.swipeRefresh.setRefreshing(true);
                 String resp = editable.toString();
                 String infoStr;
                 if (resp.length() > 3) {
@@ -77,7 +76,6 @@ public class SearchFragment extends Fragment {
                     infoStr = getString(R.string.enter_more_than_three);
                 }
                 binding.searchInfo.setText(infoStr);
-//                binding.swipeRefresh.setRefreshing(false);
             }
         });
 

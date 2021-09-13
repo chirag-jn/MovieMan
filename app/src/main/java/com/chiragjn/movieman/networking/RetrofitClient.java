@@ -6,6 +6,7 @@ import com.chiragjn.movieman.networking.api.SearchApi;
 import com.chiragjn.movieman.networking.api.TrendingApi;
 import com.chiragjn.movieman.utils.Constants;
 
+import okhttp3.Dispatcher;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -19,6 +20,7 @@ public class RetrofitClient {
     private final TrendingApi trendingApi;
     private final NowPlayingApi nowPlayingApi;
     private final SearchApi searchApi;
+    private OkHttpClient client;
 
     public RetrofitClient() {
 
@@ -32,8 +34,6 @@ public class RetrofitClient {
     }
 
     private OkHttpClient getOkHttpClient() {
-        OkHttpClient client;
-
         client = new OkHttpClient.Builder().addInterceptor(chain -> {
             Request request = chain.request();
             HttpUrl url = request.url().newBuilder().addQueryParameter(Constants.API_KEY, BuildConfig.API_KEY).build();
@@ -48,6 +48,10 @@ public class RetrofitClient {
         }
 
         return client;
+    }
+
+    public Dispatcher getDispatcher() {
+        return client.dispatcher();
     }
 
     public static synchronized RetrofitClient getInstance() {

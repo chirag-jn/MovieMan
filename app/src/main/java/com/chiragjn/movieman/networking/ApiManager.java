@@ -20,6 +20,10 @@ public class ApiManager {
         this.client = client;
     }
 
+    public void cancelQueue() {
+        client.getDispatcher().cancelAll();
+    }
+
     public void getTrendingMoviesByDay(int page, final ResponseListener<TmdbResponseData> listener, final ErrorListener errorListener) {
         Call<TmdbResponseData> call = client.getTrendingApi().getMoviesByDay(page);
         callEnqueue(call, listener, errorListener);

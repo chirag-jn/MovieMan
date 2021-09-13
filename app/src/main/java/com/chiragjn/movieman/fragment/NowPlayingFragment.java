@@ -56,7 +56,7 @@ public class NowPlayingFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.swipeRefresh.setRefreshing(true);
+//        binding.swipeRefresh.setRefreshing(true);
 
         RecyclerView gridView = binding.moviesGrid;
 
@@ -66,9 +66,10 @@ public class NowPlayingFragment extends Fragment {
 
         gridView.setAdapter(adapter);
 
-        binding.swipeRefresh.setRefreshing(false);
+//        binding.swipeRefresh.setRefreshing(false);
 
         binding.swipeRefresh.setOnRefreshListener(() -> {
+            fetcher.cancelQueue();
             fetcher.deleteAllMovies();
             fetcher.loadNowPlayingItems(0);
             fetcher.loadTrendingWeekItems(0);

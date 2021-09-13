@@ -15,6 +15,7 @@ import com.chiragjn.movieman.networking.entity.TrendingWeek;
 import com.chiragjn.movieman.networking.entity.util.TmdbResponseData;
 import com.chiragjn.movieman.networking.listener.ErrorListener;
 import com.chiragjn.movieman.networking.listener.ResponseListener;
+import com.chiragjn.movieman.utils.Constants;
 
 import java.util.ArrayList;
 
@@ -32,8 +33,16 @@ public class DataFetch {
         DaggerAppComponent.create().injectField(this);
     }
 
+    public void cancelQueue() {
+        retrofitApi.cancelQueue();
+    }
+
     public void loadNowPlayingItems(int currentPage) {
         int curPage = currentPage + 1;
+
+        if (curPage >= Constants.MAX_PAGES) {
+            return;
+        }
 
         retrofitApi.getNowPlayingMovies(curPage, new ResponseListener<TmdbResponseData>() {
             @Override
@@ -70,6 +79,10 @@ public class DataFetch {
     public void loadTrendingDayItems(int currentPage) {
         int curPage = currentPage + 1;
 
+        if (curPage >= Constants.MAX_PAGES) {
+            return;
+        }
+
         retrofitApi.getTrendingMoviesByDay(curPage, new ResponseListener<TmdbResponseData>() {
             @Override
             public void onResponse(TmdbResponseData response, int statusCode) {
@@ -104,6 +117,10 @@ public class DataFetch {
 
     public void loadTrendingWeekItems(int currentPage) {
         int curPage = currentPage + 1;
+
+        if (curPage >= Constants.MAX_PAGES) {
+            return;
+        }
 
         retrofitApi.getTrendingMoviesByWeek(curPage, new ResponseListener<TmdbResponseData>() {
             @Override

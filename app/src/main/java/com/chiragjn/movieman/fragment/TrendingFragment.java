@@ -62,28 +62,29 @@ public class TrendingFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.swipeRefreshDay.setRefreshing(true);
-        binding.swipeRefreshWeek.setRefreshing(true);
+//        binding.swipeRefreshDay.setRefreshing(true);
+//        binding.swipeRefreshWeek.setRefreshing(true);
 
         RecyclerView dayView = binding.dayMoviesGrid;
 
-        dayView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, true));
+        dayView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
         dayView.setItemAnimator(new DefaultItemAnimator());
         dayView.setHasFixedSize(false);
 
         RecyclerView weekView = binding.weekMoviesGrid;
 
-        weekView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, true));
+        weekView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
         weekView.setItemAnimator(new DefaultItemAnimator());
         weekView.setHasFixedSize(false);
 
         dayView.setAdapter(dayAdapter);
-        binding.swipeRefreshDay.setRefreshing(false);
+//        binding.swipeRefreshDay.setRefreshing(false);
 
         weekView.setAdapter(weekAdapter);
-        binding.swipeRefreshWeek.setRefreshing(false);
+//        binding.swipeRefreshWeek.setRefreshing(false);
 
         binding.swipeRefreshDay.setOnRefreshListener(() -> {
+            fetcher.cancelQueue();
             fetcher.deleteAllMovies();
             fetcher.loadNowPlayingItems(0);
             fetcher.loadTrendingWeekItems(0);
@@ -92,6 +93,7 @@ public class TrendingFragment extends Fragment {
         });
 
         binding.swipeRefreshWeek.setOnRefreshListener(() -> {
+            fetcher.cancelQueue();
             fetcher.deleteAllMovies();
             fetcher.loadNowPlayingItems(0);
             fetcher.loadTrendingWeekItems(0);
