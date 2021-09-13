@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.paging.PagedList;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -32,7 +33,32 @@ public class BookmarkFragment extends Fragment {
 
         MovieViewModel viewModel = new ViewModelProvider(this).get(MovieViewModel.class);
         adapter = new GridAdapter(getContext(), 2);
-        viewModel.getAllBookmarkMoviesPaged().observe(this, adapter::submitList);
+        viewModel.getAllBookmarkMoviesPaged().observe(this, movies -> {
+            updateView(movies.size());
+            adapter.submitList(movies);
+            movies.addWeakCallback(null, new PagedList.Callback() {
+                @Override
+                public void onChanged(int position, int count) { updateView(count); }
+
+                @Override
+                public void onInserted(int position, int count) { }
+
+                @Override
+                public void onRemoved(int position, int count) { }
+            });
+        });
+    }
+
+    void updateView(int count) {
+        if (binding!=null) {
+            if (count > 0) {
+                binding.swipeRefresh.setVisibility(View.VISIBLE);
+                binding.emptyListHead.setVisibility(View.GONE);
+            } else {
+                binding.swipeRefresh.setVisibility(View.GONE);
+                binding.emptyListHead.setVisibility(View.VISIBLE);
+            }
+        }
     }
 
     @Override

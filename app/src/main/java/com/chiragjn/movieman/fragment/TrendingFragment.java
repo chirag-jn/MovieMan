@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.paging.PagedList;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -46,8 +47,63 @@ public class TrendingFragment extends Fragment {
         dayAdapter = new GridAdapter(getContext(), 0);
         weekAdapter = new GridAdapter(getContext(), 0);
 
-        viewModel.getTop10TrendingDayMoviesPaged().observe(this, dayAdapter::submitList);
-        viewModel.getTop10TrendingWeekMoviesPaged().observe(this, weekAdapter::submitList);
+        viewModel.getTop10TrendingDayMoviesPaged().observe(this, movies -> {
+            updateViewDay(movies.size());
+            dayAdapter.submitList(movies);
+            movies.addWeakCallback(null, new PagedList.Callback() {
+                @Override
+                public void onChanged(int position, int count) { updateViewDay(count); }
+
+                @Override
+                public void onInserted(int position, int count) { }
+
+                @Override
+                public void onRemoved(int position, int count) { }
+            });
+        });
+
+        viewModel.getTop10TrendingWeekMoviesPaged().observe(this, movies -> {
+            updateViewWeek(movies.size());
+            weekAdapter.submitList(movies);
+            movies.addWeakCallback(null, new PagedList.Callback() {
+                @Override
+                public void onChanged(int position, int count) { updateViewWeek(count); }
+
+                @Override
+                public void onInserted(int position, int count) { }
+
+                @Override
+                public void onRemoved(int position, int count) { }
+            });
+        });
+    }
+
+    void updateViewDay(int count) {
+        if (binding!=null) {
+            if (count > 0) {
+                binding.swipeRefreshDay.setVisibility(View.VISIBLE);
+                binding.emptyListHeadDay.setVisibility(View.GONE);
+                binding.todayViewAll.setVisibility(View.VISIBLE);
+            } else {
+                binding.swipeRefreshDay.setVisibility(View.GONE);
+                binding.emptyListHeadDay.setVisibility(View.VISIBLE);
+                binding.todayViewAll.setVisibility(View.GONE);
+            }
+        }
+    }
+
+    void updateViewWeek(int count) {
+        if (binding!=null) {
+            if (count > 0) {
+                binding.swipeRefreshWeek.setVisibility(View.VISIBLE);
+                binding.emptyListHeadWeek.setVisibility(View.GONE);
+                binding.weekViewAll.setVisibility(View.VISIBLE);
+            } else {
+                binding.swipeRefreshWeek.setVisibility(View.GONE);
+                binding.emptyListHeadWeek.setVisibility(View.VISIBLE);
+                binding.weekViewAll.setVisibility(View.GONE);
+            }
+        }
     }
 
     @Override

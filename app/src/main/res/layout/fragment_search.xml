@@ -57,6 +57,21 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/search_panel" />
 
+        <TextView
+            android:id="@+id/empty_list_head"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/empty_list"
+            android:layout_marginTop="@dimen/margin_32dp"
+            android:textColor="@color/hint_color"
+            android:gravity="center"
+            android:textSize="@dimen/text_14sp"
+            android:fontFamily="@font/poppins_light"
+            android:textStyle="italic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/search_panel" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

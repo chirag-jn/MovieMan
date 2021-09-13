@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.paging.PagedList;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -44,7 +45,32 @@ public class SearchFragment extends Fragment {
 
         MovieViewModel viewModel = new ViewModelProvider(this).get(MovieViewModel.class);
         adapter = new GridAdapter(getContext(), 1);
-        viewModel.getSearchedMoviesPaged().observe(this, adapter::submitList);
+        viewModel.getSearchedMoviesPaged().observe(this, movies -> {
+            updateView(movies.size());
+            adapter.submitList(movies);
+            movies.addWeakCallback(null, new PagedList.Callback() {
+                @Override
+                public void onChanged(int position, int count) { updateView(count); }
+
+                @Override
+                public void onInserted(int position, int count) { }
+
+                @Override
+                public void onRemoved(int position, int count) { }
+            });
+        });
+    }
+
+    void updateView(int count) {
+        if (binding!=null) {
+            if (count > 0) {
+                binding.moviesList.setVisibility(View.VISIBLE);
+                binding.emptyListHead.setVisibility(View.GONE);
+            } else {
+                binding.moviesList.setVisibility(View.GONE);
+                binding.emptyListHead.setVisibility(View.VISIBLE);
+            }
+        }
     }
 
     @Override

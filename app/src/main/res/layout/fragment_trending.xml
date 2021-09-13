@@ -74,6 +74,21 @@
 
             </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
+            <TextView
+                android:id="@+id/empty_list_head_day"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/empty_list"
+                android:layout_marginTop="@dimen/margin_32dp"
+                android:textColor="@color/hint_color"
+                android:gravity="center"
+                android:textSize="@dimen/text_14sp"
+                android:fontFamily="@font/poppins_light"
+                android:textStyle="italic"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -136,6 +151,21 @@
                     android:gravity="center" />
 
             </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+            <TextView
+                android:id="@+id/empty_list_head_week"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/empty_list"
+                android:layout_marginTop="@dimen/margin_32dp"
+                android:textColor="@color/hint_color"
+                android:gravity="center"
+                android:textSize="@dimen/text_14sp"
+                android:fontFamily="@font/poppins_light"
+                android:textStyle="italic"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/toolbar_week" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

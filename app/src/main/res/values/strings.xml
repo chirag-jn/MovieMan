@@ -12,6 +12,7 @@
     <string name="bookmark_desc">Bookmark</string>
     <string name="rating_desc">Rating</string>
     <string name="default_rating">0.0</string>
+    <string name="empty_list">Nothing present here *yet*</string>
 
     <!--    Trending-->
     <string name="trending_today">Today</string>
