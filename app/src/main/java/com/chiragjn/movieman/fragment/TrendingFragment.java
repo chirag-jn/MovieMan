@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chiragjn.movieman.activity.MovieCollectionActivity;
@@ -20,6 +20,7 @@ import com.chiragjn.movieman.fragment.viewManager.GridAdapter;
 import com.chiragjn.movieman.injector.component.DaggerAppComponent;
 import com.chiragjn.movieman.networking.DataFetch;
 import com.chiragjn.movieman.networking.viewmodel.MovieViewModel;
+import com.chiragjn.movieman.utils.Constants;
 
 import javax.inject.Inject;
 
@@ -66,14 +67,12 @@ public class TrendingFragment extends Fragment {
 //        binding.swipeRefreshWeek.setRefreshing(true);
 
         RecyclerView dayView = binding.dayMoviesGrid;
-
-        dayView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+        dayView.setLayoutManager(new GridLayoutManager(getActivity(), Constants.COLUMNS));
         dayView.setItemAnimator(new DefaultItemAnimator());
         dayView.setHasFixedSize(false);
 
         RecyclerView weekView = binding.weekMoviesGrid;
-
-        weekView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+        weekView.setLayoutManager(new GridLayoutManager(getActivity(), Constants.COLUMNS));
         weekView.setItemAnimator(new DefaultItemAnimator());
         weekView.setHasFixedSize(false);
 
